@@ -2,50 +2,13 @@ import React, { useState } from 'react';
 import {
   Form,
   Input,
-  InputNumber,
-  Cascader,
-  Select,
   Row,
   Col,
-  Checkbox,
   Button,
-  AutoComplete,
 } from 'antd';
-const { Option } = Select;
-const residences = [
-  {
-    value: 'zhejiang',
-    label: 'Zhejiang',
-    children: [
-      {
-        value: 'hangzhou',
-        label: 'Hangzhou',
-        children: [
-          {
-            value: 'xihu',
-            label: 'West Lake',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: 'jiangsu',
-    label: 'Jiangsu',
-    children: [
-      {
-        value: 'nanjing',
-        label: 'Nanjing',
-        children: [
-          {
-            value: 'zhonghuamen',
-            label: 'Zhong Hua Men',
-          },
-        ],
-      },
-    ],
-  },
-];
+import { doApiMethod, URL_API } from '../services/apiService';
+import { toast } from 'react-toastify';
+
 const formItemLayout = {
   labelCol: {
     xs: {
@@ -79,59 +42,45 @@ const tailFormItemLayout = {
 
 const RegistrationForm = () => {
   const [form] = Form.useForm();
+  const [randomNum, setRandomNum] = useState(String(Math.floor(Math.random() * 1000000)));
+  const [captcha, setCaptcha] = useState();
+
+  const onSignupRequested = async (SignupArgs) => {
+    delete SignupArgs['captcha'];
+    console.log(12414, SignupArgs)
+    let url = URL_API + "/";
+    let data = await doApiMethod(url, "POST", SignupArgs);
+    console.log(data);
+    if (data.add === 1) {
+      toast.success("Signed up successful!");
+    } else {
+      toast.error("A problem occuried");
+    }
+  }
 
   const onFinish = (values) => {
-    console.log('Received values of form: ', values);
-  };
-
-  const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
-      <Select
-        style={{
-          width: 70,
-        }}
-      >
-        <Option value="86">+86</Option>
-        <Option value="87">+87</Option>
-      </Select>
-    </Form.Item>
-  );
-  const suffixSelector = (
-    <Form.Item name="suffix" noStyle>
-      <Select
-        style={{
-          width: 70,
-        }}
-      >
-        <Option value="USD">$</Option>
-        <Option value="CNY">¥</Option>
-      </Select>
-    </Form.Item>
-  );
-  const [autoCompleteResult, setAutoCompleteResult] = useState([]);
-
-  const onWebsiteChange = (value) => {
-    if (!value) {
-      setAutoCompleteResult([]);
-    } else {
-      setAutoCompleteResult(['.com', '.org', '.net'].map((domain) => `${value}${domain}`));
+    console.log("randomNum",randomNum)
+    console.log("captcha",captcha)
+    if(captcha === randomNum){
+      console.log('Received values of form: ', values);
+      delete values['confirm'];
+      onSignupRequested(values)
+    }else{
+      toast.error("Captcha is not correct, try again")
+      changeCaptcha();
     }
   };
 
-  const websiteOptions = autoCompleteResult.map((website) => ({
-    label: website,
-    value: website,
-  }));
+  const changeCaptcha = () => {
+    setRandomNum(String(Math.floor(Math.random() * 1000000)));
+  }
+
   return (
     <Form
       {...formItemLayout}
       form={form}
       name="register"
       onFinish={onFinish}
-      initialValues={{
-        residence: ['zhejiang', 'hangzhou', 'xihu'],
-        prefix: '86',
-      }}
       scrollToFirstError
     >
       <Form.Item
@@ -218,17 +167,46 @@ const RegistrationForm = () => {
       </Form.Item>
 
       <Form.Item
-        name="residence"
-        label="Habitual Residence"
+        name="city"
+        label="City"
         rules={[
           {
-            type: 'array',
             required: true,
-            message: 'Please select your habitual residence!',
+            message: 'Please select your city!',
+            whitespace: true,
           },
         ]}
       >
-        <Cascader options={residences} />
+        <Input />
+      </Form.Item>
+
+      <Form.Item
+        name="address"
+        label="Address"
+        rules={[
+          {
+            required: true,
+            message: 'Please select your address!',
+            whitespace: true,
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item
+        name="house_number"
+        label="House Number"
+        rules={[
+          {
+            // pattern: new RegExp(/^[0-9]+$/),
+            required: false
+          },
+        ]}
+      >
+        <Input
+          style={{ width: '30%' }}
+        />
       </Form.Item>
 
       <Form.Item
@@ -242,61 +220,10 @@ const RegistrationForm = () => {
         ]}
       >
         <Input
-          addonBefore={prefixSelector}
           style={{
             width: '100%',
           }}
         />
-      </Form.Item>
-
-      <Form.Item
-        name="donation"
-        label="Donation"
-        rules={[
-          {
-            required: true,
-            message: 'Please input donation amount!',
-          },
-        ]}
-      >
-        <InputNumber
-          addonAfter={suffixSelector}
-          style={{
-            width: '100%',
-          }}
-        />
-      </Form.Item>
-
-      <Form.Item
-        name="website"
-        label="Website"
-        rules={[
-          {
-            required: true,
-            message: 'Please input website!',
-          },
-        ]}
-      >
-        <AutoComplete options={websiteOptions} onChange={onWebsiteChange} placeholder="website">
-          <Input />
-        </AutoComplete>
-      </Form.Item>
-
-      <Form.Item
-        name="gender"
-        label="Gender"
-        rules={[
-          {
-            required: true,
-            message: 'Please select gender!',
-          },
-        ]}
-      >
-        <Select placeholder="select your gender">
-          <Option value="male">Male</Option>
-          <Option value="female">Female</Option>
-          <Option value="other">Other</Option>
-        </Select>
       </Form.Item>
 
       <Form.Item label="Captcha" extra="We must make sure that your are a human.">
@@ -312,16 +239,25 @@ const RegistrationForm = () => {
                 },
               ]}
             >
-              <Input />
+              <Input onChange={e => setCaptcha(e.target.value)} />
             </Form.Item>
           </Col>
-          <Col span={12}>
-            <Button>Get captcha</Button>
+          <Col span={6}>
+            <div onClick={changeCaptcha} className="border border-success text-center py-1 fw-bold" style={{ letterSpacing: "2px", fontStyle:"italic" }}>{randomNum}</div>
           </Col>
+          <div className="mt-2 d-flex justify-content-around">
+            <Col span={12}>
+              {/* <span className="text-danger" style={{display:captcha !== randomNum ? "block" : "none"}}>aaaaa</span> */}
+              {/* <Button className="border border-primary text-primary" onClick={checkCaptcha(captcha)}>Check Captcha</Button> */}
+            </Col>
+            <Col span={12}>
+              {/* <Button className="border border-danger text-danger" onClick={changeCaptcha}>Change Captcha</Button> */}
+            </Col>
+          </div>
         </Row>
       </Form.Item>
 
-      <Form.Item
+      {/* <Form.Item
         name="agreement"
         valuePropName="checked"
         rules={[
@@ -332,10 +268,7 @@ const RegistrationForm = () => {
         ]}
         {...tailFormItemLayout}
       >
-        <Checkbox>
-          I have read the <a href="">agreement</a>
-        </Checkbox>
-      </Form.Item>
+      </Form.Item> */}
       <Form.Item {...tailFormItemLayout}>
         <Button type="primary" htmlType="submit">
           Register

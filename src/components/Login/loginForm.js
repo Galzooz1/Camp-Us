@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Modal } from 'antd';
 import { Form, Input, Button } from 'antd';
 import { toast } from 'react-toastify';
-import { doApiGet, doApiMethod, URL_API } from '../services/apiService';
+import { doApiMethod, URL_API } from '../services/apiService';
 import RegistrationForm from './registrationForm';
 
-const LoginForm = ({ handleCancel, handleOk, showModal, isModalVisible }) => {
+const LoginForm = ({ handleCancel, handleOk, isModalVisible }) => {
 
     const [isSignup, setIsSignup] = useState(false);
     const [citiesData, setCitiesData] = useState(null);
