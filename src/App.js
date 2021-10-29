@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import HomePage from "./components/HomePage/homePage";
 import Login from "./components/Login/login";
 
 function App() {
@@ -13,7 +14,8 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-        <Route exact path={`/`} component={Login} />
+        <Route exact path={`/`} component={HomePage} />
+        <Route exact path={`/login`} component={Login} />
         </Switch>
         <ToastContainer
             position="bottom-right"
