@@ -1,57 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Modal } from 'antd';
 import { Form, Input, Button } from 'antd';
-import { toast } from 'react-toastify';
-import { doApiMethod, URL_API } from '../services/apiService';
+import { URL_API } from '../services/apiService';
 import RegistrationForm from './registrationForm';
+import { observer } from 'mobx-react';
+import storeLogin from '../../stores/loginStore';
 
 const LoginForm = ({ handleCancel, handleOk, isModalVisible }) => {
 
-    const [isSignup, setIsSignup] = useState(false);
-    const [citiesData, setCitiesData] = useState(null);
-
-    //בקשה לשרת
-    const onLoginRequested = async (LoginArgs) => {
-        let url = URL_API + "/login";
-        let data = await doApiMethod(url, "POST", LoginArgs);
-        if (data.token) {
-            localStorage.setItem("user_token", data.token);
-            // let infoUrl = URL_API + "/userInfo";
-            // let infoData = await doApiMethod(infoUrl, "GET");
-            // console.log(infoData);
-            toast.success("Welcome, " + LoginArgs.email);
-        } else {
-            toast.error("Username or password are incorrect!");
-        }
-        console.log("User Logged in: ", data);
-    }
-
-    const onFinish = (LoginArgs) => {
+    const onFinish = async(LoginArgs) => {
         console.log('Login Args:', LoginArgs);
-        onLoginRequested(LoginArgs);
+        let url = URL_API + "/login";
+        let res = await storeLogin.onLoginRequest(LoginArgs, url);
+        console.log(res);
+        if(res === "success") handleOk();
     };
-
-    const getCityData = async () => {
-        if (citiesData === null) {
-            try {
-                fetch("https://data.gov.il/api/3/action/datastore_search?resource_id=5c78e9fa-c2e2-4771-93ff-7f400a12f7ba")
-                    .then(res => res.json())
-                    .then(
-                        (result) => {
-                            console.log(result);
-                            setCitiesData(result.records);
-                        })
-            }
-            catch (err) {
-                console.log(err);
-            }
-        }
-    }
 
     return (
         <>
             <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                {!isSignup ?
+                {!storeLogin.signupVisble ?
                     <Form
                         name="basic"
                         labelCol={{ span: 8 }}
@@ -81,15 +49,10 @@ const LoginForm = ({ handleCancel, handleOk, isModalVisible }) => {
                         </Form.Item>
                     </Form>
                     :
-                    <RegistrationForm />
+                    <RegistrationForm handleOk={handleOk} />
                 }
-                <Button onClick={() => {
-                    setIsSignup(wasIsSignup => !wasIsSignup);
-                    if (!isSignup) {
-                        getCityData();
-                    }
-                }} type="secondary" className="mx-3 mt-4" htmlType="button">
-                    {!isSignup ?
+                <Button onClick={() => storeLogin.setSignup()} type="secondary" className="mx-3 mt-4" htmlType="button">
+                    {!storeLogin.signupVisble ?
                         `Sign Up` : `Login`
                     }
                 </Button>
@@ -98,4 +61,4 @@ const LoginForm = ({ handleCancel, handleOk, isModalVisible }) => {
     )
 }
 
-export default LoginForm
+export default observer(LoginForm)

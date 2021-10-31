@@ -6,8 +6,10 @@ import {
   Col,
   Button,
 } from 'antd';
-import { doApiMethod, URL_API } from '../services/apiService';
+import { URL_API } from '../services/apiService';
 import { toast } from 'react-toastify';
+import { observer } from 'mobx-react';
+import storeLogin from '../../stores/loginStore';
 
 const formItemLayout = {
   labelCol: {
@@ -40,40 +42,23 @@ const tailFormItemLayout = {
   },
 };
 
-const RegistrationForm = () => {
+const RegistrationForm = ({handleOk}) => {
   const [form] = Form.useForm();
-  const [randomNum, setRandomNum] = useState(String(Math.floor(Math.random() * 1000000)));
   const [captcha, setCaptcha] = useState();
 
-  const onSignupRequested = async (SignupArgs) => {
-    delete SignupArgs['captcha'];
-    console.log(12414, SignupArgs)
-    let url = URL_API + "/";
-    let data = await doApiMethod(url, "POST", SignupArgs);
-    console.log(data);
-    if (data.add === 1) {
-      toast.success("Signed up successful!");
-    } else {
-      toast.error("A problem occuried");
-    }
-  }
-
-  const onFinish = (values) => {
-    console.log("randomNum",randomNum)
-    console.log("captcha",captcha)
-    if(captcha === randomNum){
-      console.log('Received values of form: ', values);
-      delete values['confirm'];
-      onSignupRequested(values)
+  const onFinish = async(SignupArgs) => {
+    console.log(SignupArgs);
+    if(captcha === storeLogin.randomNum){
+      let url = URL_API + "/";
+      delete SignupArgs['confirm'];
+      let res = await storeLogin.onSignupRequest(SignupArgs, url);
+      console.log(res);
+      if(res === "success") handleOk();
     }else{
       toast.error("Captcha is not correct, try again")
-      changeCaptcha();
+      storeLogin.changeRandomNum();
     }
   };
-
-  const changeCaptcha = () => {
-    setRandomNum(String(Math.floor(Math.random() * 1000000)));
-  }
 
   return (
     <Form
@@ -107,6 +92,7 @@ const RegistrationForm = () => {
           {
             required: true,
             message: 'Please input your password!',
+            type:'string'
           },
         ]}
         hasFeedback
@@ -123,6 +109,7 @@ const RegistrationForm = () => {
           {
             required: true,
             message: 'Please confirm your password!',
+            type:'string'
           },
           ({ getFieldValue }) => ({
             validator(_, value) {
@@ -199,7 +186,6 @@ const RegistrationForm = () => {
         label="House Number"
         rules={[
           {
-            // pattern: new RegExp(/^[0-9]+$/),
             required: false
           },
         ]}
@@ -243,7 +229,7 @@ const RegistrationForm = () => {
             </Form.Item>
           </Col>
           <Col span={6}>
-            <div onClick={changeCaptcha} className="border border-success text-center py-1 fw-bold" style={{ letterSpacing: "2px", fontStyle:"italic" }}>{randomNum}</div>
+            <div onClick={() => storeLogin.changeRandomNum()} className="border border-success text-center py-1 fw-bold" style={{ letterSpacing: "2px", fontStyle:"italic" }}>{storeLogin.randomNum}</div>
           </Col>
           <div className="mt-2 d-flex justify-content-around">
             <Col span={12}>
@@ -278,4 +264,4 @@ const RegistrationForm = () => {
   );
 };
 
-export default RegistrationForm;
+export default observer(RegistrationForm);
