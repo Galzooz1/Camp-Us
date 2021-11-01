@@ -44,7 +44,6 @@ const Header = (props) => {
                 {storeLogin.isLogged ?
                     <>
                         <div className="d-flex justify-content-around align-items-center col-lg-2">
-                            <img src="https://cdn0.iconfinder.com/data/icons/elasto-online-store/26/00-ELASTOFONT-STORE-READY_user-circle-50.png" alt="test" className="rounded-circle" />
                             <Button onClick={() => storeLogin.onLogoutRequest()} type="primary" danger>Log out</Button>
                         </div>
                     </>

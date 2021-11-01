@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './header';
+import Main from './main';
 import Strip from './strip';
 
 const HomePage = (props) => {
@@ -7,6 +8,7 @@ const HomePage = (props) => {
         <>
             <Header />
             <Strip />
+            <Main />
         </>
     )
 }
