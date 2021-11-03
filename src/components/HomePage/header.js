@@ -4,6 +4,8 @@ import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/ico
 import Login from '../Login/login';
 import { observer } from 'mobx-react';
 import storeLogin from '../../stores/loginStore';
+import './header.css';
+
 
 const { SubMenu } = Menu;
 
@@ -16,20 +18,20 @@ const Header = (props) => {
         setCurrent(e.key);
     };
     return (
-        <header className="bg-dark text-white p-5">
-            <div className="container d-flex justify-content-evenly align-items-center">
+        <header style={{ backgroundColor:"#141414"}} className="text-white py-5">
+            <div className="container d-flex justify-content-around align-items-center">
                 <div className="col-lg-3">
-                    <div className="p-4 col-lg-3 bg-warning">Logo</div>
+                    <div className="logo p-4 col-lg-3">Logo</div>
                 </div>
-                <nav className="col-lg-6 mx-auto">
-                    <Menu theme="dark" style={{ lineHeight: '64px' }} className="d-flex justify-content-around" onClick={handleClick} selectedKeys={current} mode="horizontal">
-                        <Menu.Item key="mail" icon={<MailOutlined />}>
-                            Navigation One
+                <nav className="col-lg-7">
+                    <Menu style={{ lineHeight: '88px', backgroundColor:"#263EA0" }} className="d-flex justify-content-around" onClick={handleClick} selectedKeys={current} mode="horizontal">
+                        <Menu.Item key="mail" icon={<AppstoreOutlined />}>
+                            Home
                         </Menu.Item>
-                        <Menu.Item key="app" icon={<AppstoreOutlined />}>
-                            Navigation Two
+                        <Menu.Item key="app" icon={<MailOutlined />}>
+                            Contact Us
                         </Menu.Item>
-                        <SubMenu key="SubMenu" icon={<SettingOutlined />} title="Navigation Three - Submenu">
+                        <SubMenu key="SubMenu" icon={"🔻"} title=" Choose Your Land 🔻">
                             <Menu.ItemGroup title="Item 1">
                                 <Menu.Item key="setting:1">Option 1</Menu.Item>
                                 <Menu.Item key="setting:2">Option 2</Menu.Item>
@@ -48,7 +50,7 @@ const Header = (props) => {
                         </div>
                     </>
                     :
-                    <div className="col-lg-2">
+                    <div className="col-lg-3">
                     <Login />
                     </div>
                 }
