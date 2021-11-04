@@ -1,40 +1,18 @@
-import { Anchor, Button, Tooltip } from 'antd';
+import { Button, Tooltip } from 'antd';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react';
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
 import { useState } from 'react/cjs/react.development';
 import styled from 'styled-components';
 import storeMain from '../../stores/mainStore';
 import { URL_API } from '../services/apiService';
 import Countries from './countries';
-import './main.css';
+import './css/main.css';
 
 
 const WrapperDiv = styled.div`
 min-height:400px;
-`;
-
-const ButtonImg = styled.button`
-height: auto;
-width: auto;
-background-color: transparent;
-background-repeat: no-repeat;
-border: none;
-cursor: pointer;
-overflow: hidden;
-outline: none;
-background-image: none;
-border: 0 none;
-/* added these */
-margin: 2px;
-padding: 8px;
-&:focus,
-&:active:focus,
-&.active:focus {
-  outline: 0 none;
-  border: 0 none;
-}
 `;
 
 
@@ -54,14 +32,16 @@ const Main = (props) => {
     console.log(uniqueContinents);
 
     return (
-        <main style={{ backgroundColor: "#141414", padding: "32px" }}>
-            <hr style={{ backgroundColor: "#263EA0" }} />
-            <WrapperDiv className="container-fluid p-5">
-                <h2 style={{ color: "#CB2B83" }} className="p-4 text-center">Choose your desired continent</h2>
+        <main className="bg-dark" style={{/* backgroundColor: "#141414", */ padding: "32px" }}>
+            <hr style={{ backgroundColor: "#263EA0", borderTop: "3px solid #263EA0" }} />
+            <WrapperDiv className="container-fluid">
+                <article>
+                    <h1 style={{ color: "#CB2B83" }} className="p-4 text-center">Choose your desired continent</h1>
+                </article>
                 <div className="container d-flex justify-content-around align-items-center flex-wrap mt-5">
                     {uniqueContinents.map((item, i) => {
                         return (
-                            <Fragment key={i}>
+                            <div className="col-lg-3 d-flex justify-content-center m-4" key={i}>
                                 <Link to="#countries">
                                     <Tooltip title={item.mainland.fields.mainland_name.stringValue}>
                                         <Button
@@ -70,18 +50,20 @@ const Main = (props) => {
                                             type="primary"
                                             shape="circle"
                                         >
-                                            <img src={item.mainland.fields.mainland_image.stringValue} style={{ width: 200, height: 200 }} />
+                                            <img src={item.mainland.fields.mainland_image.stringValue} alt={item.mainland.fields.mainland_name.stringValue} style={{ width: 200, height: 200 }} />
                                         </Button>
                                     </Tooltip>
                                 </Link>
-                            </Fragment>
+                            </div>
                         )
                     })}
                 </div>
             </WrapperDiv>
-            <hr style={{ backgroundColor: "#263EA0" }} />
-            <div id="countries">
-                <h2 style={{ color: "#CB2B83" }} className="text-center">{currentContinent}</h2>
+            <hr style={{ backgroundColor: "#263EA0", borderTop: "3px solid #263EA0" }} />
+            <div className="mt-5" id="countries">
+                <article>
+                    <h2 style={{ color: "#CB2B83" }} className="text-center">{currentContinent}</h2>
+                </article>
                 {storeMain.numOfCountriesInContinent > 0 &&
                     <Countries />
                 }

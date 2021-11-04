@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Button, Menu } from 'antd';
-import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
+import { MailOutlined, AppstoreOutlined } from '@ant-design/icons';
 import Login from '../Login/login';
 import { observer } from 'mobx-react';
 import storeLogin from '../../stores/loginStore';
-import './header.css';
+import './css/header.css';
 
 
 const { SubMenu } = Menu;

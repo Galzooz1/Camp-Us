@@ -22,7 +22,7 @@ class MainStore {
         // alert(continentValue)
         this.continentData = [];
         this.numOfCountriesInContinent = 0;
-        this.countriesData.map((item, i) => {
+        this.countriesData.forEach((item, i) => {
             if(item.mainland.fields.mainland_name.stringValue === continentValue){
                 this.continentData.push(toJS(this.countriesData[i]));
                 this.numOfCountriesInContinent+=1;
