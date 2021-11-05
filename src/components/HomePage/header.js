@@ -5,6 +5,7 @@ import Login from '../Login/login';
 import { observer } from 'mobx-react';
 import storeLogin from '../../stores/loginStore';
 import './css/header.css';
+import CampusLogo from '../../assets/Logo.png'
 
 
 const { SubMenu } = Menu;
@@ -21,7 +22,9 @@ const Header = (props) => {
         <header style={{ backgroundColor:"#141414"}} className="text-white py-5">
             <div className="container d-flex justify-content-around align-items-center">
                 <div className="col-lg-3">
-                    <div className="logo p-4 col-lg-3">Logo</div>
+                    <div className="col-lg-3">
+                        <img src={CampusLogo} width="150px" />
+                    </div>
                 </div>
                 <nav className="col-lg-7">
                     <Menu style={{ lineHeight: '88px', backgroundColor:"#263EA0" }} className="d-flex justify-content-around" onClick={handleClick} selectedKeys={current} mode="horizontal">

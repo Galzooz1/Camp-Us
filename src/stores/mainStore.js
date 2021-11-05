@@ -19,7 +19,6 @@ class MainStore {
     }
 
     getCountriesContinentData(continentValue) {
-        // alert(continentValue)
         this.continentData = [];
         this.numOfCountriesInContinent = 0;
         this.countriesData.forEach((item, i) => {

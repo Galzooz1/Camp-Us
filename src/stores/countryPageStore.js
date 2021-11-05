@@ -1,9 +1,9 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable } from "mobx"
 import { doApiGet } from "../components/services/apiService";
 
 class CountryPageStore {
     //States
-    countryData;
+    countryData = {};
 
     constructor() {
         makeAutoObservable(this);

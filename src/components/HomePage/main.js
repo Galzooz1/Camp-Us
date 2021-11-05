@@ -36,7 +36,7 @@ const Main = (props) => {
             <hr style={{ backgroundColor: "#263EA0", borderTop: "3px solid #263EA0" }} />
             <WrapperDiv className="container-fluid">
                 <article>
-                    <h1 style={{ color: "#CB2B83" }} className="p-4 text-center">Choose your desired continent</h1>
+                    <h1 className="p-4 text-center">Choose your desired continent</h1>
                 </article>
                 <div className="container d-flex justify-content-around align-items-center flex-wrap mt-5">
                     {uniqueContinents.map((item, i) => {
@@ -59,13 +59,15 @@ const Main = (props) => {
                     })}
                 </div>
             </WrapperDiv>
-            <hr style={{ backgroundColor: "#263EA0", borderTop: "3px solid #263EA0" }} />
             <div className="mt-5" id="countries">
-                <article>
-                    <h2 style={{ color: "#CB2B83" }} className="text-center">{currentContinent}</h2>
-                </article>
                 {storeMain.numOfCountriesInContinent > 0 &&
-                    <Countries />
+                    <>
+                        <hr style={{ backgroundColor: "#263EA0", borderTop: "3px solid #263EA0" }} />
+                        <article>
+                            <h2 style={{ color: "#CB2B83" }} className="text-center">{currentContinent}</h2>
+                        </article>
+                        <Countries />
+                    </>
                 }
             </div>
         </main>
