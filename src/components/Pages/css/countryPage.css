@@ -1,4 +1,7 @@
-article {
+.article-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
     background: linear-gradient(
       to right, 
       hsl(98 100% 62%), 

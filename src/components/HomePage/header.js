@@ -6,6 +6,7 @@ import { observer } from 'mobx-react';
 import storeLogin from '../../stores/loginStore';
 import './css/header.css';
 import CampusLogo from '../../assets/Logo.png'
+import { useHistory } from 'react-router';
 
 
 const { SubMenu } = Menu;
@@ -13,6 +14,7 @@ const { SubMenu } = Menu;
 
 const Header = (props) => {
     const [current, setCurrent] = useState('mail');
+    const history = useHistory();
 
     const handleClick = e => {
         console.log('click ', e);
@@ -23,15 +25,15 @@ const Header = (props) => {
             <div className="container d-flex justify-content-around align-items-center">
                 <div className="col-lg-3">
                     <div className="col-lg-3">
-                        <img src={CampusLogo} width="150px" />
+                        <img src={CampusLogo} width="150px" alt="logo" />
                     </div>
                 </div>
                 <nav className="col-lg-7">
                     <Menu style={{ lineHeight: '88px', backgroundColor:"#263EA0" }} className="d-flex justify-content-around" onClick={handleClick} selectedKeys={current} mode="horizontal">
-                        <Menu.Item key="mail" icon={<AppstoreOutlined />}>
+                        <Menu.Item onClick={() => history.push("/")} key="mail" icon={<AppstoreOutlined />}>
                             Home
                         </Menu.Item>
-                        <Menu.Item key="app" icon={<MailOutlined />}>
+                        <Menu.Item onClick={() => history.push("/contact")} key="app" icon={<MailOutlined />}>
                             Contact Us
                         </Menu.Item>
                         <SubMenu key="SubMenu" icon={"🔻"} title=" Choose Your Land 🔻">

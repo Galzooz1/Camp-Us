@@ -6,7 +6,9 @@ article {
     );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-align: center;
+    /* text-align: center; */
+    display: flex;
+    justify-content: center;
   }
 
 .buttonImg {
