@@ -8,6 +8,7 @@ import { URL_API } from '../services/apiService';
 import { toJS } from 'mobx';
 import './css/countryPage.css'
 import CountryPageContent from './countryPageContent';
+import CountryPageComments from './countryPageComments';
 
 export const WrapperDiv = styled.div`
 display:flex;
@@ -53,21 +54,25 @@ const CountryPage = (props) => {
                             <CountryPageContent dataValue={"hotels"} />
                         </div>
                         <div className="col-lg-5">
-                        <h2 className="border-bottom text-white">Campings</h2>
-                            <CountryPageContent dataValue={"campings"}/>
+                            <h2 className="border-bottom text-white">Campings</h2>
+                            <CountryPageContent dataValue={"campings"} />
                         </div>
                     </WrapperDiv>
                     <hr />
                     <WrapperDiv>
                         <div className="col-lg-5">
-                        <h2 className="border-bottom text-white">Restaurants</h2>
+                            <h2 className="border-bottom text-white">Restaurants</h2>
                             <CountryPageContent dataValue={"restaurants"} />
                         </div>
                         <div className="col-lg-5">
-                        <h2 className="border-bottom text-white">Attractions</h2>
+                            <h2 className="border-bottom text-white">Attractions</h2>
                             <CountryPageContent dataValue={"attractions"} />
                         </div>
                     </WrapperDiv>
+                    <div style={{ minHeight: "300px" }} className="mt-3 p-3">
+                        <h2 className="border-bottom border-5 text-start text-white">Comments</h2>
+                        <CountryPageComments countryData={storeCountry.countryData} />
+                    </div>
                 </div>
             </main>
         </>
