@@ -12,7 +12,7 @@ const CountryPageComments = ({ countryData }) => {
             storeCountry.getUsersData(url);
             console.log(toJS(storeCountry.usersData));
         })
-    }, []);
+    }, [storeCountry.getUsersData, countryData]);
 
 
     return (

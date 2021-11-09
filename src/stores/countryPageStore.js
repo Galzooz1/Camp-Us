@@ -4,6 +4,7 @@ import { doApiGet } from "../components/services/apiService";
 class CountryPageStore {
     //States
     countryData = {};
+    singleUserData = [];
     usersData = [];
 
     constructor() {
@@ -21,7 +22,8 @@ class CountryPageStore {
         console.log(url);
         let data = await doApiGet(url);
         console.log(data);
-        this.usersData.push(...this.usersData, data);
+        this.singleUserData = [...this.singleUserData, data];
+        this.usersData = this.singleUserData;
         console.log(toJS(this.usersData));
     }
 
