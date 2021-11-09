@@ -1,9 +1,10 @@
-import { makeAutoObservable } from "mobx"
+import { makeAutoObservable, toJS } from "mobx"
 import { doApiGet } from "../components/services/apiService";
 
 class CountryPageStore {
     //States
     countryData = {};
+    usersData = [];
 
     constructor() {
         makeAutoObservable(this);
@@ -14,6 +15,14 @@ class CountryPageStore {
         let data = await doApiGet(url);
         this.countryData = data;
         console.log(this.countryData);
+    }
+
+    async getUsersData(url){
+        console.log(url);
+        let data = await doApiGet(url);
+        console.log(data);
+        this.usersData.push(...this.usersData, data);
+        console.log(toJS(this.usersData));
     }
 
     starsRender(numOfStars){

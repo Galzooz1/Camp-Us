@@ -1,16 +1,34 @@
-import React from 'react';
+import { toJS } from 'mobx';
+import { observer } from 'mobx-react-lite';
+import React, { useEffect } from 'react';
+import storeCountry from '../../stores/countryPageStore';
+import { URL_API } from '../services/apiService';
 
 const CountryPageComments = ({ countryData }) => {
+    useEffect(() => {
+        console.log(toJS(countryData));
+        countryData?.comments?.values?.forEach((item, i) => {
+            let url = URL_API + "/user/" + item?.mapValue.fields.userId?.stringValue;
+            storeCountry.getUsersData(url);
+            console.log(toJS(storeCountry.usersData));
+        })
+    }, []);
+
 
     return (
         <div className="bg-secondary p-4">
-            {countryData.comments.values?.map((item, i) => {
+            {countryData?.comments?.values?.map((item, i) => {
                 return (
                     <>
-                    <div className="bg-success p-2">
-                        {item.mapValue.fields.comment.stringValue}
-                    </div>
-                    <hr/>
+                        <div className="bg-success p-2">
+                            {/* {storeCountry?.usersData.length > 0 && */}
+                                <span className="fw-bold me-1">
+                                    {storeCountry?.usersData[i]?.first_name}:
+                                </span>
+                            {/* } */}
+                            {item?.mapValue.fields.comment?.stringValue}
+                        </div>
+                        <hr />
                     </>
                 )
             })}
@@ -22,4 +40,4 @@ const CountryPageComments = ({ countryData }) => {
     )
 }
 
-export default CountryPageComments;
+export default observer(CountryPageComments);
