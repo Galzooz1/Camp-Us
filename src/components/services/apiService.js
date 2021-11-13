@@ -20,7 +20,7 @@ export const doApiGet = async(_url) => {
         method: _method,
         body: JSON.stringify(_body),
         headers: {
-          'auth-token': localStorage["token"],
+          'auth-token': localStorage["user_token"],
           'content-type': "application/json"
         }
       })

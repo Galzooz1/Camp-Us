@@ -39,7 +39,7 @@ const CountryPage = (props) => {
                     {storeCountry.countryData?.abroad &&
                         <Tooltip title="Flight needed">
                             <div style={{ cursor: "help" }} className="border rounded-circle p-2 ms-3 block">
-                                <i class="fas fa-plane-departure"></i>
+                                <i className="fas fa-plane-departure"></i>
                             </div>
                         </Tooltip>
                     }

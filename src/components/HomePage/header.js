@@ -7,6 +7,7 @@ import storeLogin from '../../stores/loginStore';
 import './css/header.css';
 import CampusLogo from '../../assets/Logo.png'
 import { useHistory } from 'react-router';
+import AuthUser from '../authUser';
 
 
 const { SubMenu } = Menu;
@@ -28,6 +29,7 @@ const Header = (props) => {
                         <img src={CampusLogo} width="150px" alt="logo" />
                     </div>
                 </div>
+                {/* <AuthUser/> */}
                 <nav className="col-lg-7">
                     <Menu style={{ lineHeight: '88px', backgroundColor:"#263EA0" }} className="d-flex justify-content-around" onClick={handleClick} selectedKeys={current} mode="horizontal">
                         <Menu.Item onClick={() => history.push("/")} key="mail" icon={<AppstoreOutlined />}>
@@ -48,7 +50,7 @@ const Header = (props) => {
                         </SubMenu>
                     </Menu>
                 </nav>
-                {storeLogin.isLogged ?
+                {localStorage["user_token"] ?
                     <>
                         <div className="d-flex justify-content-around align-items-center col-lg-2">
                             <Button onClick={() => storeLogin.onLogoutRequest()} type="primary" danger>Log out</Button>

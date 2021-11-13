@@ -13,6 +13,7 @@ const Login = (props) => {
 
     const handleOk = () => {
         setIsModalVisible(false);
+        window.location.reload();
     };
 
     const handleCancel = () => {
