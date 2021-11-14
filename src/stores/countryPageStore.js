@@ -6,12 +6,20 @@ class CountryPageStore {
     countryData = {};
     singleUserData = [];
     usersData = [];
+    commentsData = [];
 
     constructor() {
         makeAutoObservable(this);
     }
 
     //Functions
+
+    async getCommentsData(url) {
+        let data = await doApiGet(url);
+        this.commentsData = data;
+        console.log(toJS(this.commentsData));
+    }
+
     async getSingleCountryData(url) {
         let data = await doApiGet(url);
         this.countryData = data;

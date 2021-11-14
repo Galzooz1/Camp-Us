@@ -1,37 +1,42 @@
 import { Button, Spin } from 'antd';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Fragment } from 'react/cjs/react.production.min';
 import storeCountry from '../../stores/countryPageStore';
 import { URL_API } from '../services/apiService';
 
 const CountryPageComments = ({ countryData }) => {
+    let [comments, setComments] = useState([]);
     useEffect(() => {
-        console.log(toJS(countryData));
-        countryData?.comments?.values?.forEach((item, i) => {
-            let url = URL_API + "/user/" + item?.mapValue.fields.userId?.stringValue;
-            storeCountry.getUsersData(url);
-            console.log(toJS(storeCountry.usersData));
+        let url = URL_API + "/comments"
+        storeCountry.getCommentsData(url);
+        storeCountry.commentsData.forEach((item, i) => {
+            if (item.country_name === countryData.name) {
+                setComments(comments => [...comments, item.comment])
+                let url = URL_API + "/user/" + item.userId;
+                storeCountry.getUsersData(url);
+            }
         })
     }, [countryData]);
 
 
     return (
         <div className="bg-secondary p-4">
-            {storeCountry?.usersData.length > 0 ?
-                countryData?.comments?.values?.map((item, i) => {
+            {storeCountry?.usersData?.length > 0 ?
+                comments.map((item, i) => {
                     return (
-                        <>
+                        <Fragment key={i}>
                             <div className="bg-success p-2">
                                 {/* {storeCountry?.usersData.length > 0 && */}
                                 <span className="fw-bold me-1">
                                     {storeCountry?.usersData[i]?.first_name}:
                                 </span>
                                 {/* } */}
-                                {item?.mapValue.fields.comment?.stringValue}
+                                {item}
                             </div>
                             <hr />
-                        </>
+                        </Fragment>
                     )
                 })
                 :
