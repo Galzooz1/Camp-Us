@@ -1,5 +1,6 @@
 import { Image, Spin, Tabs, Tooltip } from 'antd';
 import React, { useState } from 'react';
+import { Fragment } from 'react';
 import storeCountry from '../../stores/countryPageStore';
 import { AttractionDiv } from './countryPage';
 
@@ -52,7 +53,7 @@ const CountryPageContent = ({ dataValue }) => {
                                             <Image.PreviewGroup preview={{ visible, onVisibleChange: vis => setVisible(vis) }}>
                                                 {item?.mapValue.fields.imgs.arrayValue.values.map((img, i) => {
                                                     return (
-                                                        <>
+                                                        <Fragment key={i}>
                                                             {i < 3 ?
                                                                 <Image
                                                                     preview={{ visible: false }}
@@ -73,7 +74,7 @@ const CountryPageContent = ({ dataValue }) => {
                                                                     />
                                                                 </div>
                                                             }
-                                                        </>
+                                                        </Fragment>
                                                     )
                                                 })}
                                             </Image.PreviewGroup>

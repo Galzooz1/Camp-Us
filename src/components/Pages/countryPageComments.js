@@ -1,13 +1,16 @@
-import { Button, Spin } from 'antd';
+import { Spin } from 'antd';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import React, { useEffect, useState } from 'react';
 import { Fragment } from 'react/cjs/react.production.min';
+import storeComment from '../../stores/countryCommentStore';
 import storeCountry from '../../stores/countryPageStore';
 import { URL_API } from '../services/apiService';
+import CountryPostComment from './countryPostComment';
 
 const CountryPageComments = ({ countryData }) => {
     let [comments, setComments] = useState([]);
+
     useEffect(() => {
         let url = URL_API + "/comments"
         storeCountry.getCommentsData(url);
@@ -18,8 +21,13 @@ const CountryPageComments = ({ countryData }) => {
                 storeCountry.getUsersData(url);
             }
         })
-    }, [countryData]);
+    }, [countryData, storeComment.postComment]);
 
+    const onPostComment = (commentArgs) => {
+        let url = URL_API + "/comments";
+        console.log(commentArgs);
+        storeComment.postComment(url, commentArgs);
+    }
 
     return (
         <div className="bg-secondary p-4">
@@ -28,11 +36,9 @@ const CountryPageComments = ({ countryData }) => {
                     return (
                         <Fragment key={i}>
                             <div className="bg-success p-2">
-                                {/* {storeCountry?.usersData.length > 0 && */}
                                 <span className="fw-bold me-1">
                                     {storeCountry?.usersData[i]?.first_name}:
                                 </span>
-                                {/* } */}
                                 {item}
                             </div>
                             <hr />
@@ -44,13 +50,7 @@ const CountryPageComments = ({ countryData }) => {
                     <Spin />
                 </div>
             }
-            <div className="bg-danger d-flex justify-content-between align-items-center p-2">
-                <label>Add New Comment...</label>
-                <input type="text" placeholder="Write your comment" className="shadow border form-control w-75 rounded-pill" />
-                <Button type="primary">
-                    Post
-                </Button>
-            </div>
+            <CountryPostComment countryName={countryData.name} onPostComment={onPostComment} />
         </div>
     )
 }
