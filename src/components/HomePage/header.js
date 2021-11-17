@@ -7,7 +7,7 @@ import storeLogin from '../../stores/loginStore';
 import './css/header.css';
 import CampusLogo from '../../assets/Logo.png'
 import { useHistory } from 'react-router';
-import AuthUser from '../authUser';
+import AuthUser from '../Auth/authUser';
 
 
 const { SubMenu } = Menu;

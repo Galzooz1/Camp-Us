@@ -1,7 +1,8 @@
 import { Image, Spin, Tabs, Tooltip } from 'antd';
 import React, { useState } from 'react';
 import storeCountry from '../../stores/countryPageStore';
-import { AttractionDiv } from './countryPage';
+import { AttractionDiv } from './countryMain';
+import './css/countryContent.css';
 
 const { TabPane } = Tabs;
 

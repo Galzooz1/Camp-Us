@@ -6,10 +6,10 @@ import {
 } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import CountryPage from "./components/Pages/countryPage";
-import HomePage from "./components/HomePage/homePage";
+import HomePage from "./pages/homePage";
 import Login from "./components/Login/login";
-import Contact from "./components/Pages/contact";
+import Contact from "./pages/contact";
+import CountryPage from "./pages/countryPage";
 
 function App() {
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal } from 'antd';
 import { Form, Input, Button } from 'antd';
-import { URL_API } from '../services/apiService';
+import { URL_API } from '../../services/apiService';
 import RegistrationForm from './registrationForm';
 import { observer } from 'mobx-react';
 import storeLogin from '../../stores/loginStore';
