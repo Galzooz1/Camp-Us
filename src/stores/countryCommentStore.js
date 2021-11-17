@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import { doApiMethod } from "../components/services/apiService";
+import { doApiMethod } from "../services/apiService";
 
 class CountryCommentStore {
     

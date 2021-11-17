@@ -6,6 +6,7 @@ import storeComment from '../../stores/countryCommentStore';
 import storeCountry from '../../stores/countryPageStore';
 import { URL_API } from '../../services/apiService';
 import "./css/countryComments.css"
+import CountryPostComment from './countryPostComment';
 
 const CountryPageComments = ({ countryData }) => {
     let [comments, setComments] = useState([]);

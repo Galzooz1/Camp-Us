@@ -6,7 +6,7 @@ import { HashLink as Link } from 'react-router-hash-link';
 import { useState } from 'react/cjs/react.development';
 import styled from 'styled-components';
 import storeMain from '../../stores/mainStore';
-import { URL_API } from '../services/apiService';
+import { URL_API } from '../../services/apiService';
 import Countries from './countries';
 import './css/main.css';
 

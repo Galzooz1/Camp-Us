@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { toast } from "react-toastify";
-import { doApiMethod, URL_API } from "../components/services/apiService";
+import { doApiMethod, URL_API } from "../services/apiService";
 
 
 class LoginStore {

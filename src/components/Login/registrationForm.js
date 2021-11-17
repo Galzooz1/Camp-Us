@@ -6,7 +6,7 @@ import {
   Col,
   Button,
 } from 'antd';
-import { URL_API } from '../services/apiService';
+import { URL_API } from '../../services/apiService';
 import { toast } from 'react-toastify';
 import { observer } from 'mobx-react';
 import storeLogin from '../../stores/loginStore';

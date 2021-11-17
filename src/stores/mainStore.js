@@ -1,5 +1,5 @@
 import { makeAutoObservable, toJS } from "mobx";
-import { doApiGet } from "../components/services/apiService";
+import { doApiGet } from "../services/apiService";
 
 class MainStore {
     //States

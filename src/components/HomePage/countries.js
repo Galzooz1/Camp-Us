@@ -4,9 +4,8 @@ import storeMain from '../../stores/mainStore';
 import './css/countries.css';
 import { useHistory } from 'react-router';
 
-const Countries = (props) => {
+const Countries = () => {
     let history = useHistory();
-    console.log(toJS(storeMain.continentData));
 
     return (
         <div style={{ maxHeight: "600px" }} className="d-flex justify-content-around align-items-center bg-dark">
