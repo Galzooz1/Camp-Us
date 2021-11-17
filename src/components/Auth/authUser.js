@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router';
-import { doApiMethod, URL_API } from './services/apiService';
+import { doApiMethod, URL_API } from '../../services/apiService';
 
 const AuthUser = (props) => {
     let history = useHistory();
