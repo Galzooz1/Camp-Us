@@ -42,17 +42,17 @@ const CountryPostComment = ({ countryName, onPostComment }) => {
                     >
                         <Input.TextArea showCount maxLength={100} />
                     </Form.Item>
-                    {localStorage["user_token"] ? 
-                            <Button type="primary" htmlType="submit" className="ms-2">
-                                Post
-                            </Button>
-                    :
+                    {localStorage["user_token"] ?
+                        <Button type="primary" htmlType="submit" className="ms-2">
+                            Post
+                        </Button>
+                        :
                         <Tooltip defaultVisible={!localStorage["user_token"] && false} title="Login to post">
                             <Button disabled={!localStorage["user_token"] && true} type="primary" htmlType="submit" className="ms-2">
                                 Post
                             </Button>
                         </Tooltip>
-                        }
+                    }
                 </Form>
             </div>
         </>
