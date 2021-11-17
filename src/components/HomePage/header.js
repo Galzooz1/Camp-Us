@@ -22,7 +22,7 @@ const Header = (props) => {
         setCurrent(e.key);
     };
     return (
-        <header style={{ backgroundColor:"#141414"}} className="text-white py-5">
+        <header className="text-white py-5">
             <div className="container d-flex justify-content-around align-items-center">
                 <div className="col-lg-3">
                     <div className="col-lg-3">
