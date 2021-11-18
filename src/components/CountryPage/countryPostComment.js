@@ -1,10 +1,8 @@
 import React from 'react';
 import { Form, Input, Button, Tooltip } from 'antd';
 import { observer } from 'mobx-react-lite';
-import storeComment from '../../stores/countryCommentStore';
-import { URL_API } from '../../services/apiService';
 
-const CountryPostComment = ({ countryName, onPostComment }) => {
+const PostComment = ({ countryName, onPostComment }) => {
     const [form] = Form.useForm();
 
     React.useEffect(() => {
@@ -13,11 +11,10 @@ const CountryPostComment = ({ countryName, onPostComment }) => {
         })
     }, [countryName])
 
-    // const onFinish = (commentArgs) => {
-    //     let url = URL_API + "/comments";
-    //     console.log(commentArgs);
-    //     storeComment.postComment(url, commentArgs);
-    // }
+    const onFinish = (commentArgs) => {
+        onPostComment(commentArgs);
+        form.resetFields();
+    }
 
     return (
         <>
@@ -25,7 +22,7 @@ const CountryPostComment = ({ countryName, onPostComment }) => {
                 <Form
                     form={form}
                     name="basic"
-                    onFinish={onPostComment}
+                    onFinish={onFinish}
                     className="d-flex justify-content-between"
                 >
                     <Form.Item
@@ -59,4 +56,4 @@ const CountryPostComment = ({ countryName, onPostComment }) => {
     )
 }
 
-export default observer(CountryPostComment)
+export default observer(PostComment)

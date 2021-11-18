@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from '../components/HomePage/header';
+import Header from '../components/Layouts/header';
 import Main from '../components/HomePage/main';
 import Strip from '../components/HomePage/strip';
-import Footer from '../components/HomePage/footer';
+import Footer from '../components/Layouts/footer';
 
 const HomePage = (props) => {
     return(

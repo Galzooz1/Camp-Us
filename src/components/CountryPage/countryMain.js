@@ -4,9 +4,11 @@ import styled from 'styled-components';
 import storeCountry from '../../stores/countryPageStore';
 import { URL_API } from '../../services/apiService';
 import './css/countryPage.css'
-import CountryPageContent from './countryContent';
-import CountryPageComments from './countryComments';
+import CountryContent from './countryContent';
+import CountryComments from './countryComments';
+import PostComment from './countryPostComment';
 import { Tooltip } from 'antd';
+import storeComment from '../../stores/commentsStore';
 
 export const WrapperDiv = styled.div`
 display:flex;
@@ -26,6 +28,12 @@ const CountryMain = ({countryName}) => {
         console.log(storeCountry.countryData);
     }, [countryName])
 
+    const onPostComment = (commentArgs) => {
+        let url = URL_API + "/comments"
+        console.log(commentArgs);
+        storeComment.postComment(url, commentArgs);
+    }
+
     return (
         <main className="bg-dark" style={{ padding: "32px" }}>
             <article className="article-header">
@@ -44,27 +52,28 @@ const CountryMain = ({countryName}) => {
                 <WrapperDiv>
                     <div className="col-lg-5">
                         <h2 className="border-bottom text-white">Hotels</h2>
-                        <CountryPageContent dataValue={"hotels"} />
+                        <CountryContent dataValue={"hotels"} />
                     </div>
                     <div className="col-lg-5">
                         <h2 className="border-bottom text-white">Campings</h2>
-                        <CountryPageContent dataValue={"campings"} />
+                        <CountryContent dataValue={"campings"} />
                     </div>
                 </WrapperDiv>
                 <hr />
                 <WrapperDiv>
                     <div className="col-lg-5">
                         <h2 className="border-bottom text-white">Restaurants</h2>
-                        <CountryPageContent dataValue={"restaurants"} />
+                        <CountryContent dataValue={"restaurants"} />
                     </div>
                     <div className="col-lg-5">
                         <h2 className="border-bottom text-white">Attractions</h2>
-                        <CountryPageContent dataValue={"attractions"} />
+                        <CountryContent dataValue={"attractions"} />
                     </div>
                 </WrapperDiv>
                 <div style={{ minHeight: "300px" }} className="mt-3 p-3">
                     <h2 className="border-bottom border-5 text-start text-white">Comments</h2>
-                    <CountryPageComments countryData={storeCountry.countryData} />
+                    <CountryComments countryName={countryName} />
+                    <PostComment countryName={countryName} onPostComment={onPostComment} />
                 </div>
             </div>
         </main>

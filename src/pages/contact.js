@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Header from '../components/HomePage/header';
+import Header from '../components/Layouts/header';
 
 const Contact = () => {
 

@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
-import Header from '../components/HomePage/header';
+import Header from '../components/Layouts/header';
 import CountryMain from '../components/CountryPage/countryMain';
-import Footer from '../components/HomePage/footer';
+import Footer from '../components/Layouts/footer';
 
 const CountryPage = (props) => {
     return (
