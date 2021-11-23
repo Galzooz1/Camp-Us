@@ -5,6 +5,9 @@ import storeUsers from "./usersStore";
 class CommentsStore {
     commentsData = [];
     countryComments = [];
+    currentPage = 1;
+    commentsPerPage = 10;
+    loading = false;
 
     constructor() {
         makeAutoObservable(this);
@@ -17,6 +20,7 @@ class CommentsStore {
     }
 
     async getCountryComments(countryName) {
+        this.loading = true;
         this.countryComments = [];
         let url = URL_API + "/comments";
         let data = await doApiGet(url);
@@ -32,6 +36,7 @@ class CommentsStore {
                 }
             })
         }
+        this.loading = false;
         console.log(toJS(this.countryComments));
     }
 

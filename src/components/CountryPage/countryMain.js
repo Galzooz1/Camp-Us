@@ -9,6 +9,9 @@ import CountryComments from './countryComments';
 import PostComment from './countryPostComment';
 import { Tooltip } from 'antd';
 import storeComment from '../../stores/commentsStore';
+import Comments from '../HOC/comments';
+import Pagination from '../HOC/pagination';
+import storePaginate from '../../stores/paginateStore';
 
 export const WrapperDiv = styled.div`
 display:flex;
@@ -21,12 +24,17 @@ export const AttractionDiv = styled.div`
 min-height: 350px;
 `;
 
-const CountryMain = ({countryName}) => {
+const CountryMain = ({ countryName }) => {
     useEffect(() => {
         let dataUrl = URL_API + "/countries/" + countryName;
         storeCountry.getSingleCountryData(dataUrl);
+        storeComment.getCountryComments(countryName);
         console.log(storeCountry.countryData);
     }, [countryName])
+
+    const indexOfLastComment = storePaginate.currentPage * storePaginate.countPerPage;
+    const indexOfFirstComment = indexOfLastComment - storePaginate.countPerPage;
+    const currentComments = storeComment.countryComments.slice(indexOfFirstComment, indexOfLastComment);
 
     const onPostComment = (commentArgs) => {
         let url = URL_API + "/comments"
@@ -72,7 +80,12 @@ const CountryMain = ({countryName}) => {
                 </WrapperDiv>
                 <div style={{ minHeight: "300px" }} className="mt-3 p-3">
                     <h2 className="border-bottom border-5 text-start text-white">Comments</h2>
-                    <CountryComments countryName={countryName} />
+                    <Comments comments={currentComments} />
+                    <div className="d-flex justify-content-end">
+                        <Pagination
+                            totalCount={storeComment.countryComments.length}
+                        />
+                    </div>
                     <PostComment countryName={countryName} onPostComment={onPostComment} />
                 </div>
             </div>
