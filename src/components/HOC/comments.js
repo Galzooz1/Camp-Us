@@ -12,7 +12,7 @@ const Comments = ({ comments }) => {
     return (
         <>
             {comments.length ?
-                comments.map((item, i) => {
+                comments.reverse().map((item, i) => {
                     return (
                         <Fragment key={i}>
                             <CommentDiv className="commentPill rounded-pill border shadow p-2">

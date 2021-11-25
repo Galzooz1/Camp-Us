@@ -12,6 +12,7 @@ import storeComment from '../../stores/commentsStore';
 import Comments from '../HOC/comments';
 import Pagination from '../HOC/pagination';
 import storePaginate from '../../stores/paginateStore';
+import StepsNav from '../HOC/stepsNav';
 
 export const WrapperDiv = styled.div`
 display:flex;
@@ -23,6 +24,7 @@ flex-wrap: wrap;
 export const AttractionDiv = styled.div`
 min-height: 350px;
 `;
+
 
 const CountryMain = ({ countryName }) => {
     useEffect(() => {
@@ -55,6 +57,9 @@ const CountryMain = ({ countryName }) => {
                 <h1>{storeCountry.countryData?.name}</h1>
                 <div></div>
             </article>
+            <div>
+                <StepsNav />
+            </div>
             <hr style={{ backgroundColor: "#263EA0", borderTop: "3px solid #263EA0" }} />
             <div className="container mt-5">
                 <WrapperDiv>

@@ -15,9 +15,9 @@ const Pagination = ({totalCount}) => {
       <ul className='pagination'>
         {pageNumbers.map(number => (
           <li key={number} className='page-item'>
-            <a onClick={() => storePaginate.paginate(number)} className='page-link'>
+            <div style={{cursor:"pointer"}} onClick={() => storePaginate.paginate(number)} className='page-link'>
               {number}
-            </a>
+            </div>
           </li>
         ))}
       </ul>

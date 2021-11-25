@@ -45,7 +45,7 @@ const Main = (props) => {
                                 <Link to="#countries">
                                     <Tooltip title={item.mainland.fields.mainland_name.stringValue}>
                                         <Button
-                                            className="buttonImg"
+                                            className="buttonImg border border-info shadow"
                                             onClick={() => { storeMain.getCountriesContinentData(item.mainland.fields.mainland_name.stringValue); setCurrentContinent(item.mainland.fields.mainland_name.stringValue) }}
                                             type="primary"
                                             shape="circle"

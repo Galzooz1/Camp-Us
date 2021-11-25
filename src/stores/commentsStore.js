@@ -36,6 +36,7 @@ class CommentsStore {
                 }
             })
         }
+        this.countryComments.reverse();
         this.loading = false;
         console.log(toJS(this.countryComments));
     }
