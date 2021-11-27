@@ -6,14 +6,18 @@ const PostComment = ({ countryName, onPostComment }) => {
     const [form] = Form.useForm();
 
     React.useEffect(() => {
+        console.log(countryName)
         form.setFieldsValue({
             country_name: countryName
         })
-    }, [countryName])
+    }, [countryName, form])
 
     const onFinish = (commentArgs) => {
         onPostComment(commentArgs);
         form.resetFields();
+        form.setFieldsValue({
+            country_name: countryName
+        })
     }
 
     return (

@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
     background: linear-gradient(
       to right, 
       hsl(98 100% 62%), 
@@ -10,4 +11,9 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     /* text-align: center; */
+  }
+
+  .tabsNav {
+    margin: 32px auto;
+    width: 80vw;
   }

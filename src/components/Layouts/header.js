@@ -23,6 +23,7 @@ const Header = (props) => {
     };
     return (
         <header className="text-white py-5">
+            <AuthUser />
             <div className="container d-flex justify-content-around align-items-center">
                 <div className="col-lg-3">
                     <div className="col-lg-3">

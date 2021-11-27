@@ -1,59 +1,64 @@
-import { Steps } from 'antd';
-import React, { useState } from 'react';
+import { Tabs } from 'antd';
+import React from 'react';
+import { AppleOutlined, AndroidOutlined } from '@ant-design/icons';
+import './stepsNav.css';
+import CountryContent from '../CountryPage/countryContent';
 
-const { Step } = Steps;
+const { TabPane } = Tabs;
 
-const StepsNav = (props) => {
-
-    const [currentStep, setCurrentStep] = useState(0);
-
-    const changeStep = () => {
-        setCurrentStep(currentStep);
-    }
-
-    // const { currentStep } = currentStep;
+const StepsNav = () => {
     return (
         <>
-            <Steps
-                type="navigation"
-                size="small"
-                current={currentStep}
-                onChange={changeStep}
-                className="site-navigation-steps"
-            >
-                <Step
-                    key={0}
-                    onClick={() => setCurrentStep(0)}
-                    title="Step 1"
-                    subTitle="00:00:05"
-                    status="process"
-                    description="This is a description."
-                    />
-                <Step
-                    key={1}
-                    onClick={() => setCurrentStep(1)}
-                    title="Step 2"
-                    subTitle="00:01:02"
-                    status="process"
-                    description="This is a description."
-                    />
-                <Step
-                    key={2}
-                    onClick={() => setCurrentStep(2)}
-                    title="Step 3"
-                    subTitle="waiting for longlong time"
-                    status="process"
-                    description="This is a description."
-                />
-                <Step
-                    key={3}
-                    onClick={() => setCurrentStep(3)}
-                    title="Step 3"
-                    subTitle="waiting for longlong time"
-                    status="process"
-                    description="This is a description."
-                />
-            </Steps>
+            <Tabs animated tabPosition="top" style={{ width: "100%", justifyContent: "center" }} defaultActiveKey="1">
+                <TabPane
+                    tab={
+                        <span>
+                            <i className="fas fa-hotel me-2"></i>
+                            Hotels
+                        </span>
+                    }
+                    key="1"
+                >
+                    <h2 className="text-center text-white mt-4">Hotels</h2>
+                    <CountryContent dataValue={"hotels"} />
+                </TabPane>
+                <TabPane
+                    tab={
+                        <span>
+                            <i className="fas fa-campground me-2"></i>
+                            Campings
+                        </span>
+                    }
+                    key="2"
+                >
+                    <h2 className="text-center text-white mt-4">Campings</h2>
+                    <CountryContent dataValue={"campings"} />
+                </TabPane>
+                <TabPane
+                    tab={
+                        <span>
+                            <i className="fas fa-utensils me-2"></i>
+                            Restaurants
+                        </span>
+                    }
+                    key="3"
+                >
+                    <h2 className="text-center text-white mt-4">Restaurants</h2>
+                    <CountryContent dataValue={"restaurants"} />
+                </TabPane>
+                <TabPane
+                    tab={
+                        <span>
+                            <i class="fas fa-snowman me-2"></i>
+                            Attractions
+                        </span>
+                    }
+                    key="4"
+                >
+                    <h2 className="text-center text-white mt-4">Attractions</h2>
+                    <CountryContent dataValue={"attractions"} />
+                </TabPane>
+            </Tabs>
         </>
     )
 }

@@ -6,7 +6,7 @@ class CommentsStore {
     commentsData = [];
     countryComments = [];
     currentPage = 1;
-    commentsPerPage = 10;
+    countPerPage = 2;
     loading = false;
 
     constructor() {
@@ -44,7 +44,12 @@ class CommentsStore {
     async postComment(url, commentArgs) {
         let data = await doApiMethod(url, "POST", commentArgs);
         this.getCountryComments(commentArgs.country_name);
+        // this.currentPage = 1;
         console.log("ADDED", data);
+    }
+
+    paginate(pageNumber) {
+        this.currentPage = pageNumber;
     }
 }
 
