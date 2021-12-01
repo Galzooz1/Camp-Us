@@ -5,7 +5,7 @@ import Login from '../Login/login';
 import { observer } from 'mobx-react';
 import storeLogin from '../../stores/loginStore';
 import './css/header.css';
-import CampusLogo from '../../assets/Logo.png'
+import CampusLogo from '../../assets/campUsLogo.png'
 import { useHistory } from 'react-router';
 import AuthUser from '../Auth/authUser';
 
@@ -27,12 +27,12 @@ const Header = (props) => {
             <div className="container d-flex justify-content-around align-items-center">
                 <div className="col-lg-3">
                     <div className="col-lg-3">
-                        <img src={CampusLogo} width="150px" alt="logo" />
+                        <img onClick={() => history.push("/")} src={CampusLogo} className="header-logo" alt="logo" />
                     </div>
                 </div>
                 {/* <AuthUser/> */}
                 <nav className="col-lg-7">
-                    <Menu style={{ lineHeight: '88px', backgroundColor:"#263EA0" }} className="d-flex justify-content-around" onClick={handleClick} selectedKeys={current} mode="horizontal">
+                    <Menu className="header-menu" onClick={handleClick} selectedKeys={current} mode="horizontal">
                         <Menu.Item onClick={() => history.push("/")} key="mail" icon={<AppstoreOutlined />}>
                             Home
                         </Menu.Item>

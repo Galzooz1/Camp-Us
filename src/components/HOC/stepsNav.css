@@ -9,3 +9,8 @@
 .ant-tabs-tab-btn:hover {
     color: #CB2B83;
 }
+
+.navLink {
+    font-size: 1.3rem;
+    font-weight: 300;
+}

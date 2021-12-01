@@ -1,6 +1,46 @@
 header {
     background-color:#141414;
 }
+
+.header-logo {
+    /* opacity: 0.4; */
+    width: 10rem;
+    border-radius: 50%;
+    transition: 0.8s;
+    cursor: pointer;
+    animation: rolling 1.5s ease forwards;
+}
+
+.header-logo:hover {
+    /* opacity: 1; */
+    width: 10rem;
+    border-radius: 50%;
+}
+
+@keyframes rolling {
+    from {
+        opacity: 0;
+        transform: rotate(-320deg);
+    }
+    to {
+        opacity: 0.85;
+        transform: rotate(0deg);
+    }
+}
+
+.header-menu {
+    line-height: 3rem;
+    /* background-color: #263EA0; */
+    background: linear-gradient(
+        to right, 
+        hsl(98 100% 100%), 
+        hsl(204 50% 59%)
+      );
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-around;
+}
+
 .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item:hover, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu:hover, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-active, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-active, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-open, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-open, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-selected {
     color: #CB2B83;
     /* font-size: 1.1em; */

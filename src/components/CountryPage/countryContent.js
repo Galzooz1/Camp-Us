@@ -4,12 +4,13 @@ import { Fragment } from 'react';
 import { Image, Tooltip } from 'antd';
 import './css/countryContent.css';
 import useMediaQuery from '../../hooks/useMediaQuery';
+import WebDesigns from '../../definitions/webDesign';
 
 
 const CountryContent = ({ dataValue }) => {
-    const [visible, setVisible] = useState(false);
-    const isDesktop = useMediaQuery('(min-width: 968px)');
-
+    const {
+        isDesktop
+    } = WebDesigns()
     const renderClassName = (dataValue) => {
         switch (dataValue) {
             case "hotels":
@@ -29,7 +30,7 @@ const CountryContent = ({ dataValue }) => {
         <>
             {storeCountry.countryData?.[dataValue]?.values.map((item, i) => {
                 return (
-                    <div className={`content-wrapper `+ renderClassName(dataValue)}>
+                    <div className={`content-wrapper ` + renderClassName(dataValue)}>
                         <Fragment key={i}>
                             <div className="content-inner">
                                 <h2 className="content-heading">{item?.mapValue.fields.name?.stringValue}</h2>
@@ -66,6 +67,7 @@ const CountryContent = ({ dataValue }) => {
                                     </Tooltip>
 
                                 </div>
+                                <h4 className="text-center">Images:</h4>
                                 <div className="content-imgs-main">
                                     {item?.mapValue.fields.imgs.arrayValue.values.map((img, i) => {
                                         return (

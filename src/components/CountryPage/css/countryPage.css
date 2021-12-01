@@ -17,3 +17,24 @@
     margin: 32px auto;
     width: 80vw;
   }
+
+  .content-main {
+    animation-name: movieInUp;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+  }
+
+  @keyframes movieInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(3rem);
+    }
+    50% {
+      opacity: 0.5;
+      transform: translateY(1rem);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
