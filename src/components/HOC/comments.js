@@ -14,7 +14,7 @@ const Comments = ({ comments }) => {
             {comments.length ?
                 comments.reverse().map((item, i) => {
                     return (
-                        <Fragment key={i}>
+                        <Fragment key={item.commentId}>
                             <CommentDiv className="commentPill rounded-pill border shadow p-2">
                                 {item ?
                                     <>

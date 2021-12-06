@@ -30,7 +30,6 @@ const Header = (props) => {
                         <img onClick={() => history.push("/")} src={CampusLogo} className="header-logo" alt="logo" />
                     </div>
                 </div>
-                {/* <AuthUser/> */}
                 <nav className="col-lg-7">
                     <Menu className="header-menu" onClick={handleClick} selectedKeys={current} mode="horizontal">
                         <Menu.Item onClick={() => history.push("/")} key="mail" icon={<AppstoreOutlined />}>

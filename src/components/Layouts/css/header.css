@@ -30,12 +30,9 @@ header {
 
 .header-menu {
     line-height: 3rem;
-    /* background-color: #263EA0; */
     background: linear-gradient(
         to right, 
-        hsl(98 100% 100%), 
-        hsl(204 50% 59%)
-      );
+        #181C1E, #1F3443 ,#2B5E80);
     border-radius: 15px;
     display: flex;
     justify-content: space-around;

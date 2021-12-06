@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import storeCountry from '../../stores/countryPageStore';
 import { Fragment } from 'react';
 import { Image, Tooltip } from 'antd';
 import './css/countryContent.css';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import WebDesigns from '../../definitions/webDesign';
+import { observer } from 'mobx-react-lite';
 
 
-const CountryContent = ({ dataValue }) => {
+const CountryContent = () => {
     const {
         isDesktop
     } = WebDesigns()
-    const renderClassName = (dataValue) => {
-        switch (dataValue) {
+
+    const renderClassName = (name) => {
+        switch (name) {
             case "hotels":
                 return "content-wrapper-1"
             case "campings":
@@ -28,9 +30,9 @@ const CountryContent = ({ dataValue }) => {
 
     return (
         <>
-            {storeCountry.countryData?.[dataValue]?.values.map((item, i) => {
+            {storeCountry.countryData?.[storeCountry.activityName]?.values.map((item, i) => {
                 return (
-                    <div className={`content-wrapper ` + renderClassName(dataValue)}>
+                    <div className={`content-wrapper ` + renderClassName(storeCountry.activityName)}>
                         <Fragment key={i}>
                             <div className="content-inner">
                                 <h2 className="content-heading">{item?.mapValue.fields.name?.stringValue}</h2>
@@ -100,4 +102,4 @@ const CountryContent = ({ dataValue }) => {
     )
 }
 
-export default CountryContent
+export default observer(CountryContent)

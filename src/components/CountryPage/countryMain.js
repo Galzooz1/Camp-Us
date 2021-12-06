@@ -31,9 +31,10 @@ const CountryMain = ({ countryName }) => {
     useEffect(() => {
         let dataUrl = URL_API + "/countries/" + countryName;
         storeCountry.getSingleCountryData(dataUrl);
-        storeComment.getCountryComments(countryName);
+        storeComment.getCountryComments(countryName, storeCountry.activityName);
         console.log(storeCountry.countryData);
-    }, [countryName])
+        console.log(storeCountry.activityName)
+    }, [countryName, storeCountry.activityName])
 
     const indexOfLastComment = storeComment.currentPage * storeComment.countPerPage;
     const indexOfFirstComment = indexOfLastComment - storeComment.countPerPage;
@@ -80,7 +81,7 @@ const CountryMain = ({ countryName }) => {
                             </div>
                         </div>
                         <Comments comments={currentComments} />
-                        <PostComment countryName={countryName} onPostComment={onPostComment} />
+                        <PostComment countryName={countryName} activityName={storeCountry.activityName} onPostComment={onPostComment} />
                     </div>
                 </div>
             </div>

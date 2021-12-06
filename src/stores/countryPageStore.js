@@ -4,6 +4,7 @@ import { doApiGet } from "../services/apiService";
 class CountryPageStore {
     //States
     countryData = {};
+    activityName = "hotels";
 
     constructor() {
         makeAutoObservable(this);
@@ -23,6 +24,10 @@ class CountryPageStore {
             stars[i] = (<i className="fas fa-star fa-2x text-warning"></i>)
         }
         return stars;
+    }
+
+    setActivityName(name){
+        this.activityName = name;
     }
 }
 

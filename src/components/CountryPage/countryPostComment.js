@@ -1,22 +1,24 @@
 import React from 'react';
 import { Form, Input, Button, Tooltip } from 'antd';
 import { observer } from 'mobx-react-lite';
+import storeCountry from '../../stores/countryPageStore';
 
-const PostComment = ({ countryName, onPostComment }) => {
+const PostComment = ({ countryName, onPostComment, activityName }) => {
     const [form] = Form.useForm();
 
     React.useEffect(() => {
-        console.log(countryName)
         form.setFieldsValue({
-            country_name: countryName
-        })
-    }, [countryName, form])
+            country_name: countryName,
+            activity: activityName
+        });
+    }, [countryName, activityName, form])
 
     const onFinish = (commentArgs) => {
         onPostComment(commentArgs);
         form.resetFields();
         form.setFieldsValue({
-            country_name: countryName
+            country_name: countryName,
+            activity: activityName
         })
     }
 
@@ -31,6 +33,12 @@ const PostComment = ({ countryName, onPostComment }) => {
                 >
                     <Form.Item
                         name="country_name"
+                        hidden={true}
+                    >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item
+                        name="activity"
                         hidden={true}
                     >
                         <Input />
