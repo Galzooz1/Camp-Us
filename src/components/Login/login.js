@@ -2,10 +2,12 @@ import React, {  useState } from 'react';
 import { Button } from 'antd';
 import 'antd/dist/antd.css';
 import LoginForm from './loginForm';
+import { useHistory } from 'react-router';
 
 
 const Login = (props) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
+    // const history = useHistory();
 
     const showModal = () => {
         setIsModalVisible(true);
@@ -13,7 +15,7 @@ const Login = (props) => {
 
     const handleOk = () => {
         setIsModalVisible(false);
-        window.location.reload();
+        // history.push("/");
     };
 
     const handleCancel = () => {

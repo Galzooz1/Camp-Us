@@ -1,10 +1,12 @@
 import { makeAutoObservable, toJS } from "mobx";
-import { doApiGet } from "../services/apiService";
+import { doApiGet, doApiMethod, URL_API } from "../services/apiService";
 
 class UsersStore {
     singleUserData = [];
     singleUser;
     usersData = [];
+    usersList = [];
+    userData;
 
     constructor() {
         makeAutoObservable(this);
@@ -12,10 +14,25 @@ class UsersStore {
 
     async getUsersData(url){
         console.log(url);
-        let data = await doApiGet(url);
+        let data = await doApiMethod(url, "GET");
         console.log(data);
-        this.singleUserData = [...this.singleUserData, data];
-        this.usersData = this.singleUserData;
+        this.usersData = data;
+        if(this.usersData.length){
+            this.usersData.forEach((item, i)=> {
+                this.usersList = [...this.usersList, {
+                    "#":i,
+                    created: item.created,
+                    email: item.email,
+                    name: item.first_name + ' ' + item.last_name,
+                    job: item.job,
+                    phone: item.phone,
+                    city: item.city,
+                    id: item.id
+                }]
+            })
+        }
+        // this.singleUserData = [...this.singleUserData, data];
+        // this.usersData = this.singleUserData;
         console.log(toJS(this.usersData));
     }
 
@@ -25,6 +42,14 @@ class UsersStore {
         this.singleUser = data;
         console.log(this.singleUser);
         return this.singleUser;
+    }
+
+    async getUserByToken() {
+        if(localStorage["user_token"]) {
+            let url = URL_API + "/userinfo";
+            let infoData = await doApiMethod(url, "GET");
+            this.userData = infoData;
+        }
     }
 }
 

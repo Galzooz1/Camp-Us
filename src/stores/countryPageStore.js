@@ -1,5 +1,6 @@
 import { makeAutoObservable, toJS } from "mobx"
-import { doApiGet } from "../services/apiService";
+import { toast } from "react-toastify";
+import { doApiGet, doApiMethod, URL_API } from "../services/apiService";
 
 class CountryPageStore {
     //States
@@ -28,6 +29,24 @@ class CountryPageStore {
 
     setActivityName(name){
         this.activityName = name;
+    }
+
+    async deleteSingleActivity(countryId, countryName, activity, indexOfActivity) {
+        console.log(countryId, countryName, activity, indexOfActivity)
+        let url = URL_API + "/countries/activity/"+countryId;
+        let data = await doApiMethod(url, "DELETE", {
+            "activity":activity,
+            "indexOfActivity":indexOfActivity,
+            "countryName":countryName
+        });
+        console.log(data);
+        if(data.delete === 1){
+            toast.success("Item deleted");
+        }else if(!data){
+            toast.error("Try again later")
+        }else{
+            toast.error("Try again later")
+        }
     }
 }
 

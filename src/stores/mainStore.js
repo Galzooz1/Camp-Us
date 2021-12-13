@@ -1,3 +1,4 @@
+import { Image } from "antd";
 import { makeAutoObservable, toJS } from "mobx";
 import { doApiGet } from "../services/apiService";
 
@@ -6,6 +7,7 @@ class MainStore {
     countriesData = [];
     continentData = [];
     numOfCountriesInContinent = 0;
+    countriesList = [];
 
     constructor() {
         makeAutoObservable(this);
@@ -16,6 +18,19 @@ class MainStore {
         let data = await doApiGet(url);
         console.log(data)
         this.countriesData = data;
+        if(this.countriesData.length){
+            this.countriesData.forEach((item, i) => {
+                this.countriesList = [...this.countriesList, {
+                    "#":i,
+                    created: item.created,
+                    name: item.name,
+                    capital: item.capital,
+                    continent: item.mainland.fields.mainland_name.stringValue,
+                    image: <Image width={100} src={item.country_image} alt={item.name}/>,
+                    id: item.id
+                }]
+            })
+        }
     }
 
     getCountriesContinentData(continentValue) {

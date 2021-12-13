@@ -12,7 +12,7 @@ import storeComment from '../../stores/commentsStore';
 import Comments from '../HOC/comments';
 import Pagination from '../HOC/pagination';
 // import storePaginate from '../../stores/paginateStore';
-import StepsNav from '../HOC/stepsNav';
+import StepsNav from './stepsNav';
 import CountryContent2 from './countryContent';
 
 export const WrapperDiv = styled.div`

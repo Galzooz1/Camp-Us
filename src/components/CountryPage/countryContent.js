@@ -6,9 +6,13 @@ import './css/countryContent.css';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import WebDesigns from '../../definitions/webDesign';
 import { observer } from 'mobx-react-lite';
+import { IconDiv } from '../HOC/comments';
+import { useHistory } from 'react-router';
+import storeLogin from '../../stores/loginStore';
 
 
 const CountryContent = () => {
+    let history = useHistory();
     const {
         isDesktop
     } = WebDesigns()
@@ -35,7 +39,22 @@ const CountryContent = () => {
                     <div className={`content-wrapper ` + renderClassName(storeCountry.activityName)}>
                         <Fragment key={i}>
                             <div className="content-inner">
-                                <h2 className="content-heading">{item?.mapValue.fields.name?.stringValue}</h2>
+                                <div className="d-flex">
+                                    <h2 className="content-heading">{item?.mapValue.fields.name?.stringValue}</h2>
+                                    {storeLogin.isAdmin &&
+                                        <IconDiv onClick={() => {
+                                            if (window.confirm("Are you sure you want to delete this item?")) {
+                                                storeCountry.deleteSingleActivity(storeCountry.countryData?.id, storeCountry.countryData?.name, storeCountry.activityName, i);
+                                                history.push("/temp");
+                                                history.goBack();
+                                            }
+                                        }}>
+                                            <Tooltip title="Delete">
+                                                <i className="far fa-times-circle text-danger"></i>
+                                            </Tooltip>
+                                        </IconDiv>
+                                    }
+                                </div>
                                 <div style={{ cursor: "help" }} className="mt-5 mb-4 d-flex justify-content-center">
                                     <Tooltip title={item?.mapValue.fields.stars?.integerValue + " Stars"}>
                                         {storeCountry.starsRender(item?.mapValue.fields.stars?.integerValue)}
@@ -69,7 +88,6 @@ const CountryContent = () => {
                                     </Tooltip>
 
                                 </div>
-                                <h4 className="text-center">Images:</h4>
                                 <div className="content-imgs-main">
                                     {item?.mapValue.fields.imgs.arrayValue.values.map((img, i) => {
                                         return (

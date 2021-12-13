@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Menu } from 'antd';
-import { MailOutlined, AppstoreOutlined } from '@ant-design/icons';
+import { MailOutlined, AppstoreOutlined, CrownFilled } from '@ant-design/icons';
 import Login from '../Login/login';
 import { observer } from 'mobx-react';
 import storeLogin from '../../stores/loginStore';
@@ -21,6 +21,8 @@ const Header = (props) => {
         console.log('click ', e);
         setCurrent(e.key);
     };
+    console.log(storeLogin.isAdmin);
+    console.log(storeLogin.isLogged);
     return (
         <header className="text-white py-5">
             <AuthUser />
@@ -30,7 +32,7 @@ const Header = (props) => {
                         <img onClick={() => history.push("/")} src={CampusLogo} className="header-logo" alt="logo" />
                     </div>
                 </div>
-                <nav className="col-lg-7">
+                <nav className="col-lg-6">
                     <Menu className="header-menu" onClick={handleClick} selectedKeys={current} mode="horizontal">
                         <Menu.Item onClick={() => history.push("/")} key="mail" icon={<AppstoreOutlined />}>
                             Home
@@ -38,27 +40,22 @@ const Header = (props) => {
                         <Menu.Item onClick={() => history.push("/contact")} key="app" icon={<MailOutlined />}>
                             Contact Us
                         </Menu.Item>
-                        <SubMenu key="SubMenu" icon={"🔻"} title=" Choose Your Land 🔻">
-                            <Menu.ItemGroup title="Item 1">
-                                <Menu.Item key="setting:1">Option 1</Menu.Item>
-                                <Menu.Item key="setting:2">Option 2</Menu.Item>
-                            </Menu.ItemGroup>
-                            <Menu.ItemGroup title="Item 2">
-                                <Menu.Item key="setting:3">Option 3</Menu.Item>
-                                <Menu.Item key="setting:4">Option 4</Menu.Item>
-                            </Menu.ItemGroup>
-                        </SubMenu>
+                        {storeLogin.isAdmin &&
+                            <Menu.Item onClick={() => history.push("/admin")} key="Admin" icon={<CrownFilled />}>
+                                Admin Panel
+                            </Menu.Item>
+                        }
                     </Menu>
                 </nav>
                 {localStorage["user_token"] ?
                     <>
                         <div className="d-flex justify-content-around align-items-center col-lg-2">
-                            <Button onClick={() => storeLogin.onLogoutRequest()} type="primary" danger>Log out</Button>
+                            <Button onClick={() => { storeLogin.onLogoutRequest(); history.go(0) }} type="primary" danger>Log out</Button>
                         </div>
                     </>
                     :
                     <div className="col-lg-3">
-                    <Login />
+                        <Login />
                     </div>
                 }
             </div>
