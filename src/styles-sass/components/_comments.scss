@@ -1,0 +1,59 @@
+.comment {
+    border-radius: 3px;
+    background-color: rgba($color-black, .8);
+    box-shadow: 0 1rem 2rem rgba($color-black,.2);
+    padding: 1.2rem 1.2rem 1.2rem 2rem;
+    color: $color-white;
+    margin: 2rem 0;
+    border:1px solid $color-grey-dark-3;
+
+    &__inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    &__actions {
+        background-color: $color-white;
+        border-radius: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 2px;
+        overflow: auto;
+
+        &-number {
+            font-weight: 600;
+            padding: 0 8px;
+            color: $color-black;
+            border-right: 1px solid $color-black;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        &-like, &-delete {
+            cursor:pointer;
+            font-size:1.7rem;
+            padding: 0 8px;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+        }
+
+        &-delete {
+            border-left: 1px solid $color-black;
+        }
+
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .comment {
+        &__actions {
+            margin-top: 2rem;
+        }
+    }
+  }

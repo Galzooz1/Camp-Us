@@ -1,7 +1,7 @@
 import { Button, Tooltip } from 'antd';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
 import { useState } from 'react/cjs/react.development';
 import styled from 'styled-components';
@@ -9,67 +9,84 @@ import storeMain from '../../stores/mainStore';
 import { URL_API } from '../../services/apiService';
 import Countries from './countries';
 import './css/main.css';
-
-
-const WrapperDiv = styled.div`
-min-height:400px;
-`;
-
+// import Video1 from '../../assets/video.mp4';
+// import Video2 from '../../assets/video.webm';
 
 const Main = (props) => {
     useEffect(() => {
         let url = URL_API + "/countries";
         storeMain.getCountriesData(url);
     }, []);
+    const [chosenBg, setChosenBg] = useState(null);
+    const countriesRef = useRef(null)
+    const toursRef = useRef(null)
 
     const [currentContinent, setCurrentContinent] = useState("");
+
 
     //Set method to prevent duplicate continents
     const uniqueContinents = Array.from(new Set(toJS(storeMain.countriesData).map(a => a.mainland.fields.mainland_name.stringValue)))
         .map(id => {
             return toJS(storeMain.countriesData).find(a => a.mainland.fields.mainland_name.stringValue === id)
         })
-    console.log(uniqueContinents);
 
     return (
-        <main className="bg-dark" style={{/* backgroundColor: "#141414", */ padding: "32px" }}>
-            <hr style={{ backgroundColor: "#263EA0", borderTop: "3px solid #263EA0" }} />
-            <WrapperDiv className="container-fluid">
-                <article>
-                    <h1 className="p-4">Choose your desired continent</h1>
-                </article>
-                <div className="container d-flex justify-content-around align-items-center flex-wrap mt-5">
+        <main id="section-tours">
+            <section ref={toursRef} className="section-tours">
+                <div className="bg-video">
+                    <video className="bg-video__content" autoPlay loop muted>
+                        <source src="/videos/video.mp4" type="video/mp4" />
+                        <source src="/videos/video.webm" type="video/webm" />
+                        Your browser is not supported!
+                    </video>
+                </div>
+
+                <div className="u-center-text u-margin-bottom-big">
+                    <h2 className="heading-secondary">Choose your desired continent</h2>
+                </div>
+
+                <div className="section-tours__row u-container">
                     {uniqueContinents.map((item, i) => {
                         return (
-                            <div className="col-lg-3 d-flex justify-content-center m-4" key={i}>
-                                <Link to="#countries">
+                            <div className="col-lg-3 section-tours__item m-4" key={i}>
                                     <Tooltip title={item.mainland.fields.mainland_name.stringValue}>
-                                        <Button
-                                            className="buttonImg border border-info shadow"
-                                            onClick={() => { storeMain.getCountriesContinentData(item.mainland.fields.mainland_name.stringValue); setCurrentContinent(item.mainland.fields.mainland_name.stringValue) }}
-                                            type="primary"
-                                            shape="circle"
+                                        <div
+                                            className={chosenBg === i ? "section-tours__btn-bg" : "section-tours__btn"}
+                                            onClick={() => { 
+                                                setChosenBg(i); 
+                                                storeMain.getCountriesContinentData(item.mainland.fields.mainland_name.stringValue);
+                                                 setCurrentContinent(item.mainland.fields.mainland_name.stringValue);
+                                                 countriesRef.current.scrollIntoView({ behavior: "smooth", block: "center" })
+                                                 }}
                                         >
                                             <img src={item.mainland.fields.mainland_image.stringValue} alt={item.mainland.fields.mainland_name.stringValue} style={{ width: 200, height: 200 }} />
-                                        </Button>
+                                        </div>
                                     </Tooltip>
-                                </Link>
                             </div>
                         )
                     })}
                 </div>
-            </WrapperDiv>
-            <div className="mt-5" id="countries">
+            </section>
+            <section ref={countriesRef} className="section-countries">
                 {storeMain.numOfCountriesInContinent > 0 &&
-                    <>
-                        <hr style={{ backgroundColor: "#263EA0", borderTop: "3px solid #263EA0" }} />
-                        <article>
-                            <h2 style={{ color: "#CB2B83" }}>{currentContinent}</h2>
-                        </article>
+                    <div className="section-countries__inner">
+                        {/* <hr style={{ backgroundColor: "#263EA0", borderTop: "3px solid #263EA0" }} /> */}
+                        <div className="u-center-text u-margin-bottom-medium">
+                            <h2 className="heading-secondary-white">{currentContinent}</h2>
+                        </div>
                         <Countries />
-                    </>
+                        <div className="section-countries__link u-center-text">
+                            <h3 className="section-countries__link-text">Not what you're looking for?</h3>
+                            <button onClick={() => {
+                                toursRef.current.scrollIntoView({ behavior: "smooth", block: "center" })
+                                setChosenBg(null)
+                            }} className="btn btn--animated btn--white">
+                                Go back
+                            </button>
+                        </div>
+                    </div>
                 }
-            </div>
+            </section>
         </main>
     )
 }

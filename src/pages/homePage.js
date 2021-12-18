@@ -8,7 +8,6 @@ const HomePage = (props) => {
     return(
         <>
             <Header />
-            <Strip />
             <Main />
             <Footer />
         </>

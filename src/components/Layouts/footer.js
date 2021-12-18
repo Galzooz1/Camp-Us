@@ -1,16 +1,36 @@
 import React from 'react';
-import './css/footer.css';
+import CampusLogo from '../../assets/campUsLogo.png';
 
 const Footer = (props) => {
     return (
-        <footer className="bg-secondary fw-bold text-center">
-            <div className="d-flex justify-content-around w-25 mx-auto pt-4">
-                <img class="rounded-circle" src="https://cdn.icon-icons.com/icons2/642/PNG/512/facebook_icon-icons.com_59205.png" width="40" />
-                <img class="rounded-circle" src="https://toppng.com/uploads/preview/instagram-color-icon-instagram-social-media-png-instagram-icon-11562851673w81euu4rop.png" width="40" />
-                <img class="rounded-circle" src="https://e7.pngegg.com/pngimages/720/526/png-clipart-viber-logo-whatsapp-computer-icons-instant-messaging-mobile-phones-icon-whatsapp-symbol-text-logo-thumbnail.png" width="40"/>
+
+        <footer className="footer">
+            <div className="footer__logo-box">
+                <img src={CampusLogo} alt="Full logo" className="footer__logo" />
             </div>
-            <div className="mt-4"><small>&copy; Copyright 2021</small></div>
+            <div className="row">
+                <div className="col-1-of-2">
+                    <div className="footer__navigation">
+                        <ul className="footer__list">
+                            <li className="footer__item"><a href="#" className="footer__link">Company</a></li>
+                            <li className="footer__item"><a href="#" className="footer__link">Contact us</a></li>
+                            <li className="footer__item"><a href="#" className="footer__link">Carrers</a></li>
+                            <li className="footer__item"><a href="#" className="footer__link">Privacy policy</a></li>
+                            <li className="footer__item"><a href="#" className="footer__link">Terms</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="col-1-of-2">
+                    <p className="footer__copyright">
+                        Built by &copy; <a href="#" className="footer__link">Gal Aluf</a>
+                        <br />
+                        For more work visit our <a href="#" className="footer__link"> website</a>.
+                    </p>
+                </div>
+            </div>
         </footer>
+
+
     )
 }
 

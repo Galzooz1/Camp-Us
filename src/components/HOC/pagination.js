@@ -1,12 +1,8 @@
 import { observer } from 'mobx-react';
 import React from 'react';
 import storeComment from '../../stores/commentsStore';
-// import storePaginate from '../../stores/paginateStore';
 
 const Pagination = ({totalCount}) => {
-  console.log(totalCount)
-  console.log(storeComment.countPerPage)
-  console.log(storeComment.currentPage)
     const pageNumbers = [];
 
     for (let i = 1; i <= Math.ceil(totalCount / storeComment.countPerPage); i++) {
@@ -18,7 +14,7 @@ const Pagination = ({totalCount}) => {
       <ul className='pagination'>
         {pageNumbers.map(number => (
           <li key={number} className='page-item'>
-            <div style={{cursor:"pointer"}} onClick={() => storeComment.paginate(number)} className='page-link'>
+            <div style={{cursor:"pointer"}} onClick={() => storeComment.paginate(number)} className='page-link bg-dark text-white'>
               {number}
             </div>
           </li>

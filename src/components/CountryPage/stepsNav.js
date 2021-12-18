@@ -1,17 +1,11 @@
 import { Tabs } from 'antd';
 import React from 'react';
-import './css/stepsNav.css';
 import CountryContent from '../CountryPage/countryContent';
 import WebDesigns from '../../definitions/webDesign';
 import storeCountry from '../../stores/countryPageStore';
 import { useLocation } from 'react-router';
 import DataTable from '../adminPanel/dataTable';
 import storeAdmin from '../../stores/adminStore';
-import { observer } from 'mobx-react-lite';
-import storeMain from '../../stores/mainStore';
-import storeComment from '../../stores/commentsStore';
-import storeUsers from '../../stores/usersStore';
-import { URL_API } from '../../services/apiService';
 
 const { TabPane } = Tabs;
 
@@ -23,7 +17,7 @@ const StepsNav = () => {
 
     return (
         <>
-            <Tabs animated tabPosition="top" style={{ width: "100%", justifyContent: "center" }} defaultActiveKey="1">
+            <Tabs animated tabPosition="top" defaultActiveKey="1" className="section-country__nav-tabs">
                 {/* Countries */}
                 {location.pathname.includes("/country/") && (
                     <>
@@ -31,7 +25,7 @@ const StepsNav = () => {
                             tab={
                                 <div onClick={() => storeCountry.setActivityName("hotels")}>
                                     {isDesktop ?
-                                        <span className="navLink">
+                                        <span className="section-country__nav-tab">
                                             <i className="fas fa-hotel me-2"></i>
                                             Hotels
                                         </span>
@@ -46,14 +40,14 @@ const StepsNav = () => {
                             key="1"
 
                         >
-                            <h2 className="text-center text-white mt-4">Hotels</h2>
+                            <h2 className="section-country__nav-heading heading-primary--sub">Hotels</h2>
                             <CountryContent />
                         </TabPane>
                         <TabPane
                             tab={
                                 <div onClick={() => storeCountry.setActivityName("campings")}>
                                     {isDesktop ?
-                                        <span className="navLink">
+                                        <span className="section-country__nav-tab">
                                             <i className="fas fa-campground me-2"></i>
                                             Campings
                                         </span>
@@ -66,14 +60,14 @@ const StepsNav = () => {
                             }
                             key="2"
                         >
-                            <h2 className="text-center text-white mt-4">Campings</h2>
+                            <h2 className="section-country__nav-heading heading-primary--sub">Campings</h2>
                             <CountryContent />
                         </TabPane>
                         <TabPane
                             tab={
                                 <div onClick={() => storeCountry.setActivityName("restaurants")}>
                                     {isDesktop ?
-                                        <span className="navLink">
+                                        <span className="section-country__nav-tab">
                                             <i className="fas fa-utensils me-2"></i>
                                             Restaurants
                                         </span>
@@ -86,14 +80,14 @@ const StepsNav = () => {
                             }
                             key="3"
                         >
-                            <h2 className="text-center text-white mt-4">Restaurants</h2>
+                            <h2 className="section-country__nav-heading heading-primary--sub">Restaurants</h2>
                             <CountryContent />
                         </TabPane>
                         <TabPane
                             tab={
                                 <div onClick={() => storeCountry.setActivityName("attractions")}>
                                     {isDesktop ?
-                                        <span className="navLink">
+                                        <span className="section-country__nav-tab">
                                             <i class="fas fa-snowman me-2"></i>
                                             Attractions
                                         </span>
@@ -106,7 +100,7 @@ const StepsNav = () => {
                             }
                             key="4"
                         >
-                            <h2 className="text-center text-white mt-4">Attractions</h2>
+                            <h2 className="section-country__nav-heading heading-primary--sub">Attractions</h2>
                             <CountryContent />
                         </TabPane>
                     </>
@@ -118,7 +112,7 @@ const StepsNav = () => {
                             tab={
                                 <div onClick={() => storeAdmin.changeApiMethod("users")}>
                                     {isDesktop ?
-                                        <span className="navLink">
+                                        <span className="section-country__nav-tab">
                                             <i className="fas fa-user me-2"></i>
                                             Users
                                         </span>
@@ -130,14 +124,14 @@ const StepsNav = () => {
                                 </div>}
                             key="1"
                         >
-                            <h2 className="text-center text-white mt-4">Users</h2>
+                            <h2 className="section-country__nav-heading heading-primary--sub">Users</h2>
                             <DataTable />
                         </TabPane>
                         <TabPane
                             tab={
                                 <div onClick={() => storeAdmin.changeApiMethod("countries")}>
                                     {isDesktop ?
-                                        <span className="navLink">
+                                        <span className="section-country__nav-tab">
                                             <i className="fas fa-globe me-2"></i>
                                             Countries
                                         </span>
@@ -149,14 +143,14 @@ const StepsNav = () => {
                                 </div>}
                             key="2"
                         >
-                            <h2 className="text-center text-white mt-4">Countries</h2>
+                            <h2 className="section-country__nav-heading heading-primary--sub">Countries</h2>
                             <DataTable />
                         </TabPane>
                         <TabPane
                             tab={
                                 <div onClick={() => storeAdmin.changeApiMethod("comments")}>
                                     {isDesktop ?
-                                        <span className="navLink">
+                                        <span className="section-country__nav-tab">
                                             <i className="fas fa-comment me-2"></i>
                                             Comments
                                         </span>
@@ -168,7 +162,7 @@ const StepsNav = () => {
                                 </div>}
                             key="3"
                         >
-                            <h2 className="text-center text-white mt-4">Comments</h2>
+                            <h2 className="section-country__nav-heading heading-primary--sub">Comments</h2>
                             <DataTable />
                         </TabPane>
                     </>

@@ -24,12 +24,12 @@ const PostComment = ({ countryName, onPostComment, activityName }) => {
 
     return (
         <>
-            <div className="bg-warning p-4 rounded-pill">
+            <div className="postcomment">
                 <Form
                     form={form}
                     name="basic"
                     onFinish={onFinish}
-                    className="d-flex justify-content-between"
+                    className="postcomment__form"
                 >
                     <Form.Item
                         name="country_name"
@@ -43,25 +43,27 @@ const PostComment = ({ countryName, onPostComment, activityName }) => {
                     >
                         <Input />
                     </Form.Item>
+                    <span className="postcomment__label">Add new comment</span>
                     <Form.Item
                         name="comment"
-                        label="Add new comment"
                         rules={[{ required: true, message: 'Please add text!' }]}
-                        className="w-100"
+                        className="postcomment__input-wrapper"
                     >
                         <Input.TextArea showCount maxLength={100} />
                     </Form.Item>
-                    {localStorage["user_token"] ?
-                        <Button type="primary" htmlType="submit" className="ms-2">
-                            Post
-                        </Button>
-                        :
-                        <Tooltip defaultVisible={!localStorage["user_token"] && false} title="Login to post">
-                            <Button disabled={!localStorage["user_token"] && true} type="primary" htmlType="submit" className="ms-2">
+                    <div className="postcomment__btn">
+                        {localStorage["user_token"] ?
+                            <Button type="primary" htmlType="submit" className="ms-2">
                                 Post
                             </Button>
-                        </Tooltip>
-                    }
+                            :
+                            <Tooltip defaultVisible={!localStorage["user_token"] && false} title="Login to post">
+                                <Button disabled={!localStorage["user_token"] && true} type="primary" htmlType="submit" className="ms-2">
+                                    Post
+                                </Button>
+                            </Tooltip>
+                        }
+                    </div>
                 </Form>
             </div>
         </>

@@ -1,4 +1,4 @@
-.content-wrapper {
+/* .content-wrapper {
     background-size: cover;
     background-position: bottom;
     min-height: 50vh;
@@ -13,34 +13,30 @@
     background-image:linear-gradient(
         to top,
         rgba(24, 143, 255, 0.438),
-        /* rgba(255, 0, 140, 0.116), */
         rgba(255, 255, 255, 0.65));
 }
 .content-wrapper-2 {
     background-image:linear-gradient(
         to top,
         rgba(17, 141, 79, 0.438),
-        /* rgba(255, 0, 140, 0.116), */
         rgba(255, 255, 255, 0.65));
 }
 .content-wrapper-3 {
     background-image:linear-gradient(
         to top,
         rgba(228, 255, 74, 0.438),
-        /* rgba(255, 0, 140, 0.116), */
         rgba(255, 255, 255, 0.65));
 }
 .content-wrapper-4 {
     background-image:linear-gradient(
         to top,
         rgba(16, 156, 149, 0.438),
-        /* rgba(255, 0, 140, 0.116), */
         rgba(255, 255, 255, 0.65));
-}
+} 
 
 .content-wrapper:hover {
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
-}
+}*/
 
 .content-inner {
     padding: 2.5rem;

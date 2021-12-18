@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import Footer from '../components/Layouts/footer';
 import Header from '../components/Layouts/header';
+import Navigation from '../components/Layouts/navigation';
 
 const Contact = () => {
 
@@ -26,22 +28,43 @@ const Contact = () => {
     };
     return (
         <>
-            <Header />
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="name">Name:</label>
-                    <input type="text" id="name" required />
+            <Navigation />
+            <main className="section-contact">
+                <div className="row">
+                    <div className="contact">
+                        <div className="contact__form">
+                            <form action="#" className="form">
+                                <div className="u-margin-bottom-medium">
+                                    <h2 className="heading-secondary">
+                                        Contact us now
+                                    </h2>
+                                </div>
+
+                                <div className="form__group">
+                                    <input type="text" className="form__input" placeholder="Full name" id="name" required />
+                                    <label htmlFor="name" className="form__label">Full name</label>
+                                </div>
+
+                                <div className="form__group">
+                                    <input type="email" className="form__input" placeholder="Email address" id="email" required />
+                                    <label htmlFor="email" className="form__label">Email address</label>
+                                </div>
+
+                                <div className="form__group">
+                                    <textarea type="message" className="form__input" placeholder="Your message..." id="message" required />
+                                </div>
+                                <div className="form__group pt-5">
+                                    <button className="btn btn--green">
+                                        <i className="fas fa-envelope-open me-3"></i>
+                                        Send 
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label htmlFor="email">Email:</label>
-                    <input type="email" id="email" required />
-                </div>
-                <div>
-                    <label htmlFor="message">Message:</label>
-                    <textarea id="message" required />
-                </div>
-                <button type="submit">{status}</button>
-            </form>
+            </main>
+            <Footer />
         </>
     );
 }

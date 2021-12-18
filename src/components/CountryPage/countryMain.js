@@ -47,41 +47,41 @@ const CountryMain = ({ countryName }) => {
     }
 
     return (
-        <main className="bg-dark" style={{ padding: "32px" }}>
-            <article className="article-header">
-                {storeCountry.countryData?.abroad ?
-                    <Tooltip title="Flight needed">
-                        <div style={{ cursor: "help" }} className="border rounded-circle p-2 ms-3 block">
-                            <i className="fas fa-plane-departure"></i>
-                        </div>
-                    </Tooltip>
-                    :
-                    <Tooltip title="No Flight Needed">
-                        <div style={{ cursor: "help" }} className="border rounded-circle p-2 ms-3 block">
-                            <i className="fas fa-home"></i>
-                        </div>
-                    </Tooltip>
+        <main>
+            <div className="section-country">
+                <div className="section-country__header">
+                    <div className="section-country__header-box">
+                        <img className="section-country__header-box-img" src={storeCountry.countryData?.country_image} />
+                        <h1 className="section-country__header-box-h1 heading-primary heading-primary--main">{storeCountry.countryData?.name}</h1>
+                    </div>
+                    <div className="section-country__header-icon">
+                        {storeCountry.countryData?.abroad ?
+                            <Tooltip title="Flight needed">
+                                <i className="fas fa-plane-departure"></i>
+                            </Tooltip>
+                            :
+                            <Tooltip title="No Flight Needed">
+                                <i className="fas fa-home"></i>
+                            </Tooltip>
 
-                }
-                <h1 className="me-5">{storeCountry.countryData?.name}</h1>
-                <div></div>
-            </article>
-            <div className="content-main">
-                <nav className="tabsNav">
-                    <StepsNav />
-                </nav>
-                <div className="container mt-5">
-                    <div style={{ minHeight: "300px" }} className="mt-3 p-3">
-                        <div className="d-flex justify-content-between border-bottom border-5 mb-3">
-                            <h2 className="text-start text-white">Comments</h2>
-                            <div className="d-flex justify-content-end">
-                                <Pagination
-                                    totalCount={storeComment.countryComments.length}
-                                />
+                        }
+                    </div>
+                </div>
+                <div className="section-country__content">
+                    <nav className="section-country__nav">
+                        <StepsNav />
+                    </nav>
+                    <div className="section-country__comments">
+                            <div className="section-country__comments-header">
+                                <h2 className="section-country__comments-header-h2">Comments</h2>
+                                <div className="d-flex justify-content-end">
+                                    <Pagination
+                                        totalCount={storeComment.countryComments.length}
+                                    />
+                                </div>
                             </div>
-                        </div>
-                        <Comments comments={currentComments} />
-                        <PostComment countryName={countryName} activityName={storeCountry.activityName} onPostComment={onPostComment} />
+                            <Comments comments={currentComments} />
+                            <PostComment countryName={countryName} activityName={storeCountry.activityName} onPostComment={onPostComment} />
                     </div>
                 </div>
             </div>

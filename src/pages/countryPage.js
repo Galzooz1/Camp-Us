@@ -1,13 +1,13 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
-import Header from '../components/Layouts/header';
 import CountryMain from '../components/CountryPage/countryMain';
 import Footer from '../components/Layouts/footer';
+import Navigation from '../components/Layouts/navigation';
 
 const CountryPage = (props) => {
     return (
         <>
-            <Header />
+            <Navigation />
             <CountryMain countryName={props.match.params.countryName} />
             <Footer />
         </>

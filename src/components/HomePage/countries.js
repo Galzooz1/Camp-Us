@@ -1,16 +1,13 @@
 import React from 'react';
-import { toJS } from 'mobx';
 import storeMain from '../../stores/mainStore';
-import './css/countries.css';
 import { useHistory } from 'react-router';
 
 const Countries = () => {
     let history = useHistory();
 
     return (
-        <div style={{ maxHeight: "600px" }} className="d-flex justify-content-around align-items-center bg-dark">
-            {toJS(storeMain.continentData).map((item, i) => {
-                console.log(item.country_image)
+        <div className="d-flex justify-content-around align-items-center">
+            {storeMain.continentData.map((item, i) => {
                 return (
                     <div key={item.name} onClick={() => history.push("/country/" + item.name)} className="card">
                         <div className="face face1">

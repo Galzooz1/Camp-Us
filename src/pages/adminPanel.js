@@ -1,13 +1,13 @@
 import React from 'react';
-import Header from '../components/Layouts/header';
 import MainAdmin from '../components/adminPanel/mainAdmin';
 import Footer from '../components/Layouts/footer';
+import Navigation from '../components/Layouts/navigation';
 
 
 const AdminPanel = (props) => {
     return(
         <>
-            <Header />
+            <Navigation />
             <MainAdmin />
             <Footer />
         </>
