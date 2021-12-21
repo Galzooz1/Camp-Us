@@ -1,7 +1,6 @@
 import React from 'react';
 import { Form, Input, Button, Tooltip } from 'antd';
 import { observer } from 'mobx-react-lite';
-import storeCountry from '../../stores/countryPageStore';
 
 const PostComment = ({ countryName, onPostComment, activityName }) => {
     const [form] = Form.useForm();

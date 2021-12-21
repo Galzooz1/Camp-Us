@@ -21,13 +21,10 @@ class AdminStore {
         switch (apiMethod) {
             case "users":
                 return storeUsers.usersList;
-                break;
             case "countries":
                 return storeMain.countriesList;
-                break;
             case "comments":
                 return storeComment.commentsList;
-                break;
             default:
                 break;
         }
@@ -52,6 +49,14 @@ class AdminStore {
             //     break;
             default:
                 break;
+        }
+    }
+
+    async checkIfAdmin(){
+        let url = URL_API+"/checkAdmin";
+        let data = await doApiMethod(url, "POST", {});
+        if(data.auth !== "admin") {
+            localStorage.removeItem("admin");
         }
     }
 }

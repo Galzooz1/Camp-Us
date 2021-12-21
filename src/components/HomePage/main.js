@@ -1,16 +1,12 @@
-import { Button, Tooltip } from 'antd';
+import { Tooltip } from 'antd';
 import { toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React, { useEffect, useRef } from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
 import { useState } from 'react/cjs/react.development';
-import styled from 'styled-components';
 import storeMain from '../../stores/mainStore';
 import { URL_API } from '../../services/apiService';
 import Countries from './countries';
-import './css/main.css';
-// import Video1 from '../../assets/video.mp4';
-// import Video2 from '../../assets/video.webm';
 
 const Main = (props) => {
     useEffect(() => {
@@ -22,7 +18,6 @@ const Main = (props) => {
     const toursRef = useRef(null)
 
     const [currentContinent, setCurrentContinent] = useState("");
-
 
     //Set method to prevent duplicate continents
     const uniqueContinents = Array.from(new Set(toJS(storeMain.countriesData).map(a => a.mainland.fields.mainland_name.stringValue)))
@@ -56,10 +51,11 @@ const Main = (props) => {
                                                 setChosenBg(i); 
                                                 storeMain.getCountriesContinentData(item.mainland.fields.mainland_name.stringValue);
                                                  setCurrentContinent(item.mainland.fields.mainland_name.stringValue);
-                                                 countriesRef.current.scrollIntoView({ behavior: "smooth", block: "center" })
                                                  }}
                                         >
+                                            <Link to="#countries">
                                             <img src={item.mainland.fields.mainland_image.stringValue} alt={item.mainland.fields.mainland_name.stringValue} style={{ width: 200, height: 200 }} />
+                                             </Link>
                                         </div>
                                     </Tooltip>
                             </div>
@@ -70,8 +66,7 @@ const Main = (props) => {
             <section ref={countriesRef} className="section-countries">
                 {storeMain.numOfCountriesInContinent > 0 &&
                     <div className="section-countries__inner">
-                        {/* <hr style={{ backgroundColor: "#263EA0", borderTop: "3px solid #263EA0" }} /> */}
-                        <div className="u-center-text u-margin-bottom-medium">
+                        <div id="countries" className="u-center-text u-margin-bottom-medium">
                             <h2 className="heading-secondary-white">{currentContinent}</h2>
                         </div>
                         <Countries />

@@ -1,3 +1,7 @@
+body {
+  font-family: "Lato", sans-serif;
+}
+
 .heading-primary {
     color: $color-white;
     text-transform: uppercase;
@@ -30,13 +34,10 @@
     font-size: 3.5rem;
     text-transform: uppercase;
     font-weight: 700;
-    background-image: linear-gradient(to right, $color-primary, $color-primary-dark);
-    -webkit-background-clip: text;
-    color: transparent;
+    @include backgroundText($color-primary, $color-primary-dark);
     letter-spacing: .2rem;
-
     &-white {
-        background-image: linear-gradient(to right, $color-black, $color-primary-light);
+      @include backgroundText($color-black, $color-primary-light);
     }
 }
 
@@ -46,14 +47,26 @@
     text-transform: uppercase;
 }
 
+.heading-content {
+  @include backgroundText($color-tertiary-dark, $color-primary-dark);
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.paragraph {
+  font-size: $default-font-size;
+
+  &:not(:last-child) {
+      margin-bottom: 3rem;
+  }
+}
+
 @media screen and (max-width: 650px) {
     .heading-primary {
       &--main {
-        // font-size: 3rem;
         letter-spacing: 0.75rem;
       }
       &--sub {
-        // font-size: 1rem;
         letter-spacing: 0.25rem;
       }
     }

@@ -5,3 +5,11 @@
         clear: both;
     }
 }
+
+@mixin backgroundText($background1, $backgroud2) {
+    & {
+        -webkit-background-clip: text;
+        color: transparent;
+        background-image: linear-gradient(to right, $background1, $backgroud2);
+    }
+}

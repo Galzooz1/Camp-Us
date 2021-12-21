@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Table, Input, Button, Space, Spin } from 'antd';
+import React, { useRef, useState } from 'react';
+import { Table, Input, Button, Space } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
 import storeUsers from '../../stores/usersStore';
@@ -17,7 +17,7 @@ const DataTable = (props) => {
     const getColumnSearchProps = (dataIndex) => {
         return {
             filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-                <div style={{ padding: 8 }}>
+                <div style={{ padding: "8px" }}>
                     <Input
                         ref={searchInput}
                         placeholder={`Search ${dataIndex}`}
@@ -76,7 +76,6 @@ const DataTable = (props) => {
     };
 
     if (storeUsers?.usersList?.length > 0) {
-        console.log(Object.keys(data[0]));
         Object.keys(data[0]).forEach((item, i) => {
             let Title = item.toLowerCase()
                 .split('_')
@@ -96,11 +95,11 @@ const DataTable = (props) => {
             width: 150,
             render: (text, record) => (
                 <Space size="middle" >
-                    <a onClick={() => {
+                    <div className="text-danger" onClick={() => {
                         if (window.confirm("Are you sure you want to delete " + record.name + "?")) {
                             storeAdmin.deleteItem(storeAdmin.apiMethodOf, record.id);
                         }
-                    }}>Delete</a>
+                    }}>Delete</div>
                 </Space >
             )
         })

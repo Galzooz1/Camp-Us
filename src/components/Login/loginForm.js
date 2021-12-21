@@ -9,16 +9,14 @@ import storeLogin from '../../stores/loginStore';
 const LoginForm = ({ handleCancel, handleOk, isModalVisible }) => {
 
     const onFinish = async(LoginArgs) => {
-        console.log('Login Args:', LoginArgs);
         let url = URL_API + "/login";
         let res = await storeLogin.onLoginRequest(LoginArgs, url);
-        console.log(res);
         if(res === "success") handleOk();
     };
 
     return (
         <>
-            <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+            <Modal title="Sign-In" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                 {!storeLogin.signupVisble ?
                     <Form
                         name="basic"

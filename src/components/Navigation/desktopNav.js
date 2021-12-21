@@ -35,7 +35,7 @@ const DesktopNav = (props) => {
                                 Contact
                             </div>
                         </Link>
-                        {storeLogin.isAdmin &&
+                        {localStorage["admin"] &&
                             <Link to={"/admin"} className="navigation__item">
                                 <div className="navigation__link">
                                     <i className="fas fa-crown navigation__icon"></i>

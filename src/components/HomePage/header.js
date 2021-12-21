@@ -1,6 +1,5 @@
 import React from 'react';
-import Navigation from './navigation';
-
+import Navigation from '../Layouts/navigation';
 
 const Header = (props) => {
 
@@ -11,10 +10,10 @@ const Header = (props) => {
                 <div>
 
                     <h1 class="heading-primary">
-                        <span class="heading-primary--main">Outdoors</span>
-                        <span class="heading-primary--sub">is where life happens</span>
+                        <span class="heading-primary--main">CampUs</span>
+                        <span class="heading-primary--sub">let your adventure begin</span>
                     </h1>
-                    <a href="#section-tours" class="btn btn--white btn--animated">Discover our tours</a>
+                    <a href="#section-tours" class="btn btn--white btn--animated">Discover tours</a>
                 </div>
             </div>
         </header>

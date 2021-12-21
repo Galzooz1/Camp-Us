@@ -5,11 +5,13 @@ import {
   Row,
   Col,
   Button,
+  Checkbox,
 } from 'antd';
 import { URL_API } from '../../services/apiService';
 import { toast } from 'react-toastify';
 import { observer } from 'mobx-react';
 import storeLogin from '../../stores/loginStore';
+import { Link } from 'react-router-dom';
 
 const formItemLayout = {
   labelCol: {
@@ -42,19 +44,18 @@ const tailFormItemLayout = {
   },
 };
 
-const RegistrationForm = ({handleOk}) => {
+const RegistrationForm = ({ handleOk }) => {
   const [form] = Form.useForm();
   const [captcha, setCaptcha] = useState();
 
-  const onFinish = async(SignupArgs) => {
-    console.log(SignupArgs);
-    if(captcha === storeLogin.randomNum){
+  const onFinish = async (SignupArgs) => {
+    if (captcha === storeLogin.randomNum) {
       let url = URL_API + "/";
       delete SignupArgs['confirm'];
+      delete SignupArgs['agreement'];
       let res = await storeLogin.onSignupRequest(SignupArgs, url);
-      console.log(res);
-      if(res === "success") handleOk();
-    }else{
+      if (res === "success") handleOk();
+    } else {
       toast.error("Captcha is not correct, try again")
       storeLogin.changeRandomNum();
     }
@@ -92,7 +93,7 @@ const RegistrationForm = ({handleOk}) => {
           {
             required: true,
             message: 'Please input your password!',
-            type:'string'
+            type: 'string'
           },
         ]}
         hasFeedback
@@ -109,7 +110,7 @@ const RegistrationForm = ({handleOk}) => {
           {
             required: true,
             message: 'Please confirm your password!',
-            type:'string'
+            type: 'string'
           },
           ({ getFieldValue }) => ({
             validator(_, value) {
@@ -229,21 +230,18 @@ const RegistrationForm = ({handleOk}) => {
             </Form.Item>
           </Col>
           <Col span={6}>
-            <div onClick={() => storeLogin.changeRandomNum()} className="border border-success text-center py-1 fw-bold" style={{ letterSpacing: "2px", fontStyle:"italic" }}>{storeLogin.randomNum}</div>
+            <div onClick={() => storeLogin.changeRandomNum()} className="border border-success text-center py-1 fw-bold" style={{ letterSpacing: "2px", fontStyle: "italic" }}>{storeLogin.randomNum}</div>
           </Col>
           <div className="mt-2 d-flex justify-content-around">
             <Col span={12}>
-              {/* <span className="text-danger" style={{display:captcha !== randomNum ? "block" : "none"}}>aaaaa</span> */}
-              {/* <Button className="border border-primary text-primary" onClick={checkCaptcha(captcha)}>Check Captcha</Button> */}
             </Col>
             <Col span={12}>
-              {/* <Button className="border border-danger text-danger" onClick={changeCaptcha}>Change Captcha</Button> */}
             </Col>
           </div>
         </Row>
       </Form.Item>
 
-      {/* <Form.Item
+      <Form.Item
         name="agreement"
         valuePropName="checked"
         rules={[
@@ -254,7 +252,10 @@ const RegistrationForm = ({handleOk}) => {
         ]}
         {...tailFormItemLayout}
       >
-      </Form.Item> */}
+        <Checkbox>
+          I have read the <Link to="">agreement</Link>
+        </Checkbox>
+      </Form.Item>
       <Form.Item {...tailFormItemLayout}>
         <Button type="primary" htmlType="submit">
           Register

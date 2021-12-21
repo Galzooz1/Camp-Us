@@ -19,7 +19,7 @@ const MobileNav = (props) => {
                         <i className="fas fa-bars navburger__main-icon"></i>
                     </label>
 
-                    <div class="navburger__background">&nbsp;</div>
+                    <div className="navburger__background">&nbsp;</div>
 
                     <nav className="navburger__nav">
                         <div className="navburger__list">

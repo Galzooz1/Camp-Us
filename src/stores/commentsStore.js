@@ -1,7 +1,6 @@
-import { makeAutoObservable, toJS } from "mobx";
+import { makeAutoObservable } from "mobx";
 import { toast } from "react-toastify";
 import { doApiGet, doApiMethod, URL_API } from "../services/apiService";
-import storeUsers from "./usersStore";
 
 class CommentsStore {
     commentsData = [];
@@ -21,7 +20,7 @@ class CommentsStore {
         if (this.commentsData.length) {
             this.commentsData.forEach((item, i) => {
                     this.commentsList = [...this.commentsList, {
-                        "#":i,
+                        "#":(i+1),
                         created: item.created,
                         name: item.user_name,
                         comment: item.comment,
@@ -37,18 +36,14 @@ class CommentsStore {
                     }]
             })
         }
-        console.log(toJS(this.commentsData));
     }
 
     async getCountryComments(countryName, activityName) {
-        console.log("store", activityName)
         this.loading = true;
         this.countryComments = [];
         let url = URL_API + "/comments";
         let data = await doApiGet(url);
         this.commentsData = data.filter(comment => comment.activity === activityName);
-        console.log(data);
-        console.log(toJS(this.commentsData));
         if (this.commentsData.length) {
             this.commentsData.forEach(item => {
                 if (item.country_name === countryName) {
@@ -67,15 +62,11 @@ class CommentsStore {
         }
         this.countryComments.reverse();
         this.loading = false;
-        console.log(toJS(this.countryComments));
     }
 
     async postComment(url, commentArgs) {
-        console.log("commentArgs", commentArgs);
-        let data = await doApiMethod(url, "POST", commentArgs);
+        await doApiMethod(url, "POST", commentArgs);
         this.getCountryComments(commentArgs.country_name, commentArgs.activity);
-        // this.currentPage = 1;
-        console.log("ADDED", data);
     }
 
     paginate(pageNumber) {
@@ -85,7 +76,6 @@ class CommentsStore {
     async deleteComment(commentId, countryName, activity) {
         let url = URL_API + "/comments/" + commentId;
         let data = await doApiMethod(url, "DELETE", {});
-        console.log(data);
         if (data.delete === 1) {
             toast.success("Comment deleted")
             this.getCountryComments(countryName, activity);

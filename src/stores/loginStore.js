@@ -8,7 +8,6 @@ class LoginStore {
     isLogged = false;
     signupVisble = false;
     randomNum = (String(Math.floor(Math.random() * 1000000)));
-    isAdmin = false;
     
     constructor() {
         makeAutoObservable(this);
@@ -21,26 +20,21 @@ class LoginStore {
 
     async onLoginRequest(LoginArgs, url) {
         let data = await doApiMethod(url, "POST", LoginArgs);
-        console.log(data);
         if (data.token) {
             localStorage.setItem("user_token", data.token);
             let infoUrl = URL_API + "/userInfo";
             let infoData = await doApiMethod(infoUrl, "GET");
-            console.log(infoData.job)
-            console.log(this.isAdmin);
             localStorage.setItem("user_id", infoData.id);
             localStorage.setItem("user", infoData.first_name + " " + infoData.last_name);
             if(infoData.job === "admin"){
-                this.isAdmin = true;
+                localStorage.setItem("admin", true);
             }
-            console.log(infoData);
             this.isLogged = true;
             toast.success("Welcome, " + infoData.first_name);
             return "success";
         } else {
             toast.error("Username or password are incorrect!");
         }
-        console.log("User Logged in: ", data);
     }
 
     changeRandomNum() {
@@ -50,7 +44,6 @@ class LoginStore {
     async onSignupRequest(SignupArgs, url) {
         delete SignupArgs['captcha'];
         let data = await doApiMethod(url, "POST", SignupArgs);
-        console.log(data);
         if (data.add === 1) {
             toast.success("Signed up successful!");
             return "success";
@@ -63,8 +56,8 @@ class LoginStore {
         localStorage.removeItem("user_token");
         localStorage.removeItem("user_id");
         localStorage.removeItem("user");
+        localStorage.removeItem("admin");
         this.isLogged = false;
-        this.isAdmin = false;
         toast.error("You logged out");
     }
 

@@ -88,12 +88,12 @@ const StepsNav = () => {
                                 <div onClick={() => storeCountry.setActivityName("attractions")}>
                                     {isDesktop ?
                                         <span className="section-country__nav-tab">
-                                            <i class="fas fa-snowman me-2"></i>
+                                            <i className="fas fa-snowman me-2"></i>
                                             Attractions
                                         </span>
                                         :
                                         <span>
-                                            <i class="fas fa-snowman fa-2x me-2"></i>
+                                            <i className="fas fa-snowman fa-2x me-2"></i>
                                         </span>
                                     }
                                 </div>

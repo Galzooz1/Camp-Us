@@ -1,42 +1,100 @@
-// .composition {
-//     position: relative;
+.composition {
+    position: relative;
 
-//     &__photo {
-//         // width: 55%;
-//         // height: 55%;
-//         box-shadow: 0 1.5rem 4rem rgba($color-black, .4);
-//         border-radius: 2px;
-//         position: absolute;
-//         z-index: 10;
-//         transition: all .2s;
-//         outline-offset: 2rem;
+    .ant-image {
+        position: absolute!important;
+        width: 35rem;
+        height: 25rem;
+        padding: 8px;
+        box-shadow: 0 1.5rem 4rem rgba($color-black, .4);
+        z-index: 10;
+        transition: all .2s;
+        outline-offset: 2rem;
+        border-radius: 5px;
+        &:hover {
+            // outline: 1.5rem solid $color-primary;
+            transform: scale(1.05) translateY(-.5rem);
+            box-shadow: 0 2.5rem 4rem rgba($color-black, .5);
+            z-index: 20;
+        }
 
-//         &--p1 {
-//             left: 0;
-//             top: -2rem;
-//         }
+        img {
+            border-radius: 5px;
+            width: 35rem - 2rem;
+            height: 25rem - 2rem;
+        }
+        &:first-child {
+            left: -10rem!important;
+            top: 4rem!important;
+        }
+        &:nth-child(2){
+            right: 5rem!important;
+            top: 4rem!important;
+            z-index: 20;
 
-//         &--p2 {
-//             right: 0;
-//             top: 2rem;
-//         }
+        }
+        &:last-child{
+            left: 5%!important;
+            top: 25rem!important;
+        }
+        &-mask {
+            // height: 67%!important;
+            // position: absolute;
+            // top: 0;
+            // right: 0;
+            // bottom: 0;
+            // left: 0;
+            // display: flex;
+            // align-items: center;
+            // justify-content: center;
+            // color: #fff;
+            // background: rgba(0, 0, 0, 0.5);
+            // cursor: pointer;
+            // opacity: 0;
+            // transition: opacity 0.3s;
+        }
+        &__photo {
+            // width: 55%;
+            // height: 55%;
+            box-shadow: 0 1.5rem 4rem rgba($color-black, .4);
+            border-radius: 2px;
+            position: absolute;
+            z-index: 10;
+            transition: all .2s;
+            outline-offset: 2rem;
+    
+            &--p1 {
+                left: 0;
+                top: -2rem;
+            }
+    
+            &--p2 {
+                right: 0;
+                top: 2rem;
+            }
+    
+            &--p3 {
+                left: 20%;
+                top: 10rem;
+            }
+    
+            &:hover {
+                outline: 1.5rem solid $color-primary;
+                transform: scale(1.05) translateY(-.5rem);
+                box-shadow: 0 2.5rem 4rem rgba($color-black, .5);
+                z-index: 20;
+            }
+    
+        }
+    
+        &:hover &__photo:not(:hover) {
+            transform: scale(.95);
+        }
+        //composition:hover composition__photo:not(:hover) {
+    }
 
-//         &--p3 {
-//             left: 20%;
-//             top: 10rem;
-//         }
+    &:hover & .ant-image:not(:hover) {
+        transform: scale(.95);
+    }
 
-//         &:hover {
-//             outline: 1.5rem solid $color-primary;
-//             transform: scale(1.05) translateY(-.5rem);
-//             box-shadow: 0 2.5rem 4rem rgba($color-black, .5);
-//             z-index: 20;
-//         }
-
-//     }
-
-//     &:hover &__photo:not(:hover) {
-//         transform: scale(.95);
-//     }
-//     //composition:hover composition__photo:not(:hover) {
-// }
+}

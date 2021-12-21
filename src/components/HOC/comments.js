@@ -1,5 +1,4 @@
 import { Spin, Tooltip } from 'antd';
-import { toJS } from 'mobx';
 import React from 'react';
 import { Fragment } from 'react';
 import { toast } from 'react-toastify';
@@ -10,13 +9,6 @@ import storeLogin from '../../stores/loginStore';
 let Filter = require('bad-words');
 let filter = new Filter();
 
-const CommentDiv = styled.div`
-background-color: #AED4FF;
-width: 100%;
-display:flex;
-justify-content:space-between;
-`
-
 export const IconDiv = styled.div`
 cursor:pointer;
 font-size:1.7rem;
@@ -26,7 +18,6 @@ margin: 0 4px;
 const Comments = ({ comments }) => {
     const commentLikes = (item) => {
         let userLiked;
-        console.log(toJS(item))
         item.usersLiked.values.forEach(like => {
             if (like.mapValue.fields.userId.stringValue === localStorage["user_id"]) {
                 userLiked = true;
@@ -65,7 +56,6 @@ const Comments = ({ comments }) => {
                                             <div className="comment__actions">
                                                 {item.likes > 0 ?
                                                     <Tooltip title={item.likes > 1 ? `${item.usersLiked.values[0].mapValue.fields.user.stringValue} And ${item.likes - 1} more liked this` : `${item.usersLiked.values[0].mapValue.fields.user.stringValue} liked this`}>
-                                                        {/* <span className="comment__likes-number">{item.likes}</span> */}
                                                         <span className="comment__actions-number">
                                                             {item.likes > 1 ?
                                                                 `${item.usersLiked.values[0].mapValue.fields.user.stringValue} And ${item.likes - 1} more liked this`
@@ -87,7 +77,7 @@ const Comments = ({ comments }) => {
                                                     {commentLikes(item)}
                                                 </div>
                                                 {storeLogin.isLogged &&
-                                                    (localStorage["user_id"] === item.userId || storeLogin.isAdmin) &&
+                                                    (localStorage["user_id"] === item.userId || localStorage["admin"]) &&
                                                     <Tooltip title="Delete">
                                                         <div className="comment__actions-delete" onClick={() => {
                                                             if (window.confirm("Are you sure you want to delete this message?")) {

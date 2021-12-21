@@ -1,121 +1,118 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import storeCountry from '../../stores/countryPageStore';
 import { Fragment } from 'react';
 import { Image, Tooltip } from 'antd';
-import './css/countryContent.css';
-import useMediaQuery from '../../hooks/useMediaQuery';
-import WebDesigns from '../../definitions/webDesign';
 import { observer } from 'mobx-react-lite';
 import { IconDiv } from '../HOC/comments';
 import { useHistory } from 'react-router';
-import storeLogin from '../../stores/loginStore';
+import WebDesigns from '../../definitions/webDesign';
 
 
 const CountryContent = () => {
     let history = useHistory();
-    const {
-        isDesktop
-    } = WebDesigns()
+    const { isDesktop } = WebDesigns();
 
-    const renderClassName = (name) => {
-        switch (name) {
-            case "hotels":
-                return "section-country__item-1"
-            case "campings":
-                return "section-country__item-2"
-            case "restaurants":
-                return "section-country__item-3"
-            case "attractions":
-                return "section-country__item-4"
-            default:
-                break;
-        }
-    }
-
+    console.log(isDesktop);
     return (
         <>
             {storeCountry.countryData?.[storeCountry.activityName]?.values.map((item, i) => {
                 return (
-                    <div className={`section-country__item ` + renderClassName(storeCountry.activityName)}>
-                        <Fragment key={i}>
-                            <div className="section-country__item-details">
-                                <div>
-
-                                    <h2 className="heading-secondary">{item?.mapValue.fields.name?.stringValue}</h2>
-                                    {storeLogin.isAdmin &&
-                                        <IconDiv onClick={() => {
-                                            if (window.confirm("Are you sure you want to delete this item?")) {
-                                                storeCountry.deleteSingleActivity(storeCountry.countryData?.id, storeCountry.countryData?.name, storeCountry.activityName, i);
-                                                history.push("/temp");
-                                                history.goBack();
-                                            }
-                                        }}>
-                                            <Tooltip title="Delete">
-                                                <i className="far fa-times-circle text-danger"></i>
-                                            </Tooltip>
-                                        </IconDiv>
+                    <div className="section-country__item" key={i}>
+                        <div className="section-country__item-details">
+                            {localStorage["admin"] &&
+                                <IconDiv onClick={() => {
+                                    if (window.confirm("Are you sure you want to delete this item?")) {
+                                        storeCountry.deleteSingleActivity(storeCountry.countryData?.id, storeCountry.countryData?.name, storeCountry.activityName, i);
+                                        history.push("/temp");
+                                        history.goBack();
                                     }
-                                    <div style={{ cursor: "help" }} className="mt-5 mb-4 d-flex justify-content-center">
-                                        <Tooltip title={item?.mapValue.fields.stars?.integerValue + " Stars"}>
-                                            {storeCountry.starsRender(item?.mapValue.fields.stars?.integerValue)}
-                                        </Tooltip>
-                                    </div>
-                                    <div className="text-center mt-5">
-                                        {item?.mapValue.fields.city?.stringValue &&
-                                            <h4>City: {item?.mapValue.fields.city?.stringValue}</h4>
+                                }}>
+                                    <Tooltip title="Delete">
+                                        <i className="far fa-times-circle text-danger"></i>
+                                    </Tooltip>
+                                </IconDiv>
+                            }
+                            <div className="section-country__item-details-inner">
+                                <h2 className="heading-secondary">{item?.mapValue.fields.name?.stringValue}</h2>
+                                <div style={{ cursor: "help" }} className="mt-5 mb-4 d-flex justify-content-center">
+                                    <Tooltip title={item?.mapValue.fields.stars?.integerValue + " Stars"}>
+                                        {storeCountry.starsRender(item?.mapValue.fields.stars?.integerValue)}
+                                    </Tooltip>
+                                </div>
+                                <div className="d-flex justify-content-center">
+                                    <Tooltip title="Fire is Allowed">
+                                        {item?.mapValue.fields.fire_allowed?.booleanValue &&
+                                            <div style={{ cursor: "help" }} className="p-2 mx-2 rounded-circle border-dark d-flex justify-content-center">
+                                                <i className="fas fa-fire-alt fa-2x"></i>
+                                            </div>
                                         }
-                                        {item?.mapValue.fields.address?.stringValue &&
-                                            <h4>Address: {item?.mapValue.fields.address?.stringValue}</h4>
+                                    </Tooltip>
+                                    <Tooltip title="Sleeping points available">
+                                        {item?.mapValue.fields.sleep_allowed?.booleanValue &&
+                                            <div style={{ cursor: "help" }} className="p-2 mx-2 rounded-circle border-dark d-flex justify-content-center">
+                                                <i className="fas fa-bed fa-2x"></i>
+                                            </div>
                                         }
-                                        {item?.mapValue.fields.food_type?.stringValue &&
-                                            <h4>Food Type: {item?.mapValue.fields.food_type?.stringValue}</h4>
+                                    </Tooltip>
+                                    <Tooltip title="Swimming pool include">
+                                        {item?.mapValue.fields.swimming?.booleanValue &&
+                                            <div style={{ cursor: "help" }} className="p-2 mx-2 rounded-circle border-dark d-flex justify-content-center">
+                                                <i className="fas fa-swimmer fa-2x"></i>
+                                            </div>
                                         }
-                                    </div>
-                                    <div className="d-flex justify-content-center">
-                                        <Tooltip title="Fire is Allowed">
-                                            {item?.mapValue.fields.fire_allowed?.booleanValue &&
-                                                <div style={{ cursor: "help" }} className="p-2 mx-2 rounded-circle border-dark d-flex justify-content-center">
-                                                    <i className="fas fa-fire-alt fa-2x"></i>
-                                                </div>
-                                            }
-                                        </Tooltip>
-                                        <Tooltip title="Sleeping points available">
-                                            {item?.mapValue.fields.sleep_allowed?.booleanValue &&
-                                                <div style={{ cursor: "help" }} className="p-2 mx-2 rounded-circle border-dark d-flex justify-content-center">
-                                                    <i class="fas fa-bed fa-2x"></i>
-                                                </div>
-                                            }
-                                        </Tooltip>
+                                    </Tooltip>
+                                    <Tooltip title="Wifi include">
+                                        {item?.mapValue.fields.wifi?.booleanValue &&
+                                            <div style={{ cursor: "help" }} className="p-2 mx-2 rounded-circle border-dark d-flex justify-content-center">
+                                                <i className="fas fa-wifi fa-2x"></i>
+                                            </div>
+                                        }
+                                    </Tooltip>
 
-                                    </div>
+                                </div>
+                                <div className="text-center mt-3">
+                                    {item?.mapValue.fields.city?.stringValue &&
+                                        <h4 className="heading-content">City: {item?.mapValue.fields.city?.stringValue}</h4>
+                                    }
+                                    {item?.mapValue.fields.address?.stringValue &&
+                                        <h4 className="heading-content">Address: {item?.mapValue.fields.address?.stringValue}</h4>
+                                    }
+                                    {item?.mapValue.fields.food_type?.stringValue &&
+                                        <h4 className="heading-content">Food Type: {item?.mapValue.fields.food_type?.stringValue}</h4>
+                                    }
+                                    {item?.mapValue.fields.hours?.stringValue &&
+                                        <h4 className="heading-content">Open hours: {item?.mapValue.fields.hours?.stringValue}</h4>
+                                    }
+                                    {item?.mapValue.fields.description?.stringValue &&
+                                        <>
+                                        <br />
+                                            <h4 className="heading-content">Description</h4>
+                                            <div className="ms-5">
+                                                <p className="paragraph">
+                                                    {item?.mapValue.fields.description?.stringValue}
+                                                </p>
+                                            </div>
+                                        </>
+                                    }
                                 </div>
                             </div>
+                        </div>
 
-                            <div className="section-country__item-images composition">
-                                {item?.mapValue.fields.imgs.arrayValue.values.map((img, i) => {
-                                    return (
-                                        <Image.PreviewGroup /*preview={{ visible, onVisibleChange: vis => setVisible(vis) }}*/>
-                                            <Fragment key={i}>
-                                                {/* <div className="content-img-wrapper"> */}
-                                                <Image
-                                                    preview={{ visible: false }}
-                                                    // style={{ borderRadius: "5px" }}
-                                                    key={img.stringValue}
-                                                    // className={"section-country__item-img"}
-                                                    // width={isDesktop ? "20rem" : "15rem"}
-                                                    // height={isDesktop ? "20rem" : "15rem"}
+                        <div className={isDesktop ? "section-country__item-images composition" : "section-country__item-images"}>
 
-                                                    src={img.stringValue}
-                                                    alt="Hotel"
-                                                // onClick={() => setVisible(true)}
-                                                />
-                                                {/* </div> */}
-                                            </Fragment>
-                                        </Image.PreviewGroup>
-                                    )
-                                })}
-                            </div>
-                        </Fragment>
+                            {item?.mapValue.fields.imgs.arrayValue.values.map((img, i) => {
+                                return (
+                                    <Image.PreviewGroup key={i}>
+                                        <Image
+                                            preview={{ visible: false }}
+                                            key={img.stringValue}
+                                            src={img.stringValue}
+                                            alt="Hotel"
+                                        />
+                                    </Image.PreviewGroup>
+                                )
+                            })}
+                        </div>
                     </div>
                 )
             })}

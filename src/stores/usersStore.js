@@ -1,4 +1,4 @@
-import { makeAutoObservable, toJS } from "mobx";
+import { makeAutoObservable } from "mobx";
 import { doApiGet, doApiMethod, URL_API } from "../services/apiService";
 
 class UsersStore {
@@ -13,14 +13,12 @@ class UsersStore {
     }
 
     async getUsersData(url){
-        console.log(url);
         let data = await doApiMethod(url, "GET");
-        console.log(data);
         this.usersData = data;
         if(this.usersData.length){
             this.usersData.forEach((item, i)=> {
                 this.usersList = [...this.usersList, {
-                    "#":i,
+                    "#":(i+1),
                     created: item.created,
                     email: item.email,
                     name: item.first_name + ' ' + item.last_name,
@@ -31,16 +29,11 @@ class UsersStore {
                 }]
             })
         }
-        // this.singleUserData = [...this.singleUserData, data];
-        // this.usersData = this.singleUserData;
-        console.log(toJS(this.usersData));
     }
 
     async getSingleUser(url) {
-        console.log(url)
         let data = await doApiGet(url);
         this.singleUser = data;
-        console.log(this.singleUser);
         return this.singleUser;
     }
 

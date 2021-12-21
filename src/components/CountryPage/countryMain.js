@@ -1,30 +1,13 @@
 import { observer } from 'mobx-react-lite';
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
 import storeCountry from '../../stores/countryPageStore';
 import { URL_API } from '../../services/apiService';
-import './css/countryPage.css'
-import CountryContent from './countryContent';
-// import CountryComments from './countryComments';
 import PostComment from './countryPostComment';
 import { Tooltip } from 'antd';
 import storeComment from '../../stores/commentsStore';
 import Comments from '../HOC/comments';
 import Pagination from '../HOC/pagination';
-// import storePaginate from '../../stores/paginateStore';
-import StepsNav from './stepsNav';
-import CountryContent2 from './countryContent';
-
-export const WrapperDiv = styled.div`
-display:flex;
-justify-content:space-around;
-align-items:center;
-flex-wrap: wrap;
-`;
-
-export const AttractionDiv = styled.div`
-min-height: 350px;
-`;
+import StepsNav from '../HOC/stepsNav';
 
 
 const CountryMain = ({ countryName }) => {
@@ -32,9 +15,8 @@ const CountryMain = ({ countryName }) => {
         let dataUrl = URL_API + "/countries/" + countryName;
         storeCountry.getSingleCountryData(dataUrl);
         storeComment.getCountryComments(countryName, storeCountry.activityName);
-        console.log(storeCountry.countryData);
-        console.log(storeCountry.activityName)
-    }, [countryName, storeCountry.activityName])
+        window.scrollTo(0, 0);
+    }, [countryName])
 
     const indexOfLastComment = storeComment.currentPage * storeComment.countPerPage;
     const indexOfFirstComment = indexOfLastComment - storeComment.countPerPage;
@@ -42,7 +24,6 @@ const CountryMain = ({ countryName }) => {
 
     const onPostComment = (commentArgs) => {
         let url = URL_API + "/comments"
-        console.log(commentArgs);
         storeComment.postComment(url, commentArgs);
     }
 
@@ -51,12 +32,12 @@ const CountryMain = ({ countryName }) => {
             <div className="section-country">
                 <div className="section-country__header">
                     <div className="section-country__header-box">
-                        <img className="section-country__header-box-img" src={storeCountry.countryData?.country_image} />
+                        <img className="section-country__header-box-img" src={storeCountry.countryData?.country_image} alt={storeCountry.countryData.name} />
                         <h1 className="section-country__header-box-h1 heading-primary heading-primary--main">{storeCountry.countryData?.name}</h1>
                     </div>
                     <div className="section-country__header-icon">
                         {storeCountry.countryData?.abroad ?
-                            <Tooltip title="Flight needed">
+                            <Tooltip title={`${storeCountry.countryData?.kilometer}`}>
                                 <i className="fas fa-plane-departure"></i>
                             </Tooltip>
                             :
@@ -73,7 +54,7 @@ const CountryMain = ({ countryName }) => {
                     </nav>
                     <div className="section-country__comments">
                             <div className="section-country__comments-header">
-                                <h2 className="section-country__comments-header-h2">Comments</h2>
+                                <h2 className="section-country__comments-header-h2">Comments - {storeCountry.activityName.charAt(0).toUpperCase() + storeCountry.activityName.slice(1)}</h2>
                                 <div className="d-flex justify-content-end">
                                     <Pagination
                                         totalCount={storeComment.countryComments.length}

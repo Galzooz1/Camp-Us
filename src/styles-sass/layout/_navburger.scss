@@ -2,20 +2,21 @@
     &, &__home {
         height: 15vh;
     }
+    // width: 100%;
     background-color: $color-primary-light;
 
     &__wrapper {
         height: 100%;
-        margin: 0 20rem;
+        margin: 0 2rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
 
     &__logo-box {
-        position: fixed;
-        top: 1rem;
-        left: 6rem;
+        // position: relative;
+        // top: 1rem;
+        // left: 6rem;
         z-index: 2000;
     }
     
