@@ -1,4 +1,5 @@
-let myApi = "http://localhost:3008";
+// let myApi = "http://localhost:3008";
+let myApi = "https://campus2021.herokuapp.com";
 
 export const URL_API = myApi;
 
