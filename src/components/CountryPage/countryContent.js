@@ -1,9 +1,7 @@
 import React from 'react';
 import storeCountry from '../../stores/countryPageStore';
-import { Fragment } from 'react';
 import { Image, Tooltip } from 'antd';
-import { observer } from 'mobx-react-lite';
-import { IconDiv } from '../HOC/comments';
+import { observer } from 'mobx-react';
 import { useHistory } from 'react-router';
 import WebDesigns from '../../definitions/webDesign';
 
@@ -20,7 +18,7 @@ const CountryContent = () => {
                     <div className="section-country__item" key={i}>
                         <div className="section-country__item-details">
                             {localStorage["admin"] &&
-                                <IconDiv onClick={() => {
+                                <div style={{cursor:'pointer', fontSize:"1.7rem", margin:"0 4px"}} onClick={() => {
                                     if (window.confirm("Are you sure you want to delete this item?")) {
                                         storeCountry.deleteSingleActivity(storeCountry.countryData?.id, storeCountry.countryData?.name, storeCountry.activityName, i);
                                         history.push("/temp");
@@ -30,7 +28,7 @@ const CountryContent = () => {
                                     <Tooltip title="Delete">
                                         <i className="far fa-times-circle text-danger"></i>
                                     </Tooltip>
-                                </IconDiv>
+                                </div>
                             }
                             <div className="section-country__item-details-inner">
                                 <h2 className="heading-secondary">{item?.mapValue.fields.name?.stringValue}</h2>

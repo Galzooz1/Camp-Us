@@ -1,5 +1,4 @@
 import { Tooltip } from 'antd';
-import { toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import React, { useEffect, useRef } from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
@@ -20,9 +19,10 @@ const Main = (props) => {
     const [currentContinent, setCurrentContinent] = useState("");
 
     //Set method to prevent duplicate continents
-    const uniqueContinents = Array.from(new Set(toJS(storeMain.countriesData).map(a => a.mainland.fields.mainland_name.stringValue)))
+    // let setCountriesData = new Set(storeMain.countriesData);
+    const uniqueContinents = Array.from(new Set(storeMain.countriesData.map(a => a.mainland.fields.mainland_name.stringValue)))
         .map(id => {
-            return toJS(storeMain.countriesData).find(a => a.mainland.fields.mainland_name.stringValue === id)
+            return storeMain.countriesData.find(a => a.mainland.fields.mainland_name.stringValue === id)
         })
 
     return (

@@ -1,16 +1,13 @@
 import React from 'react';
 import storeMain from '../../stores/mainStore';
-import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 
 const Countries = () => {
-    let history = useHistory();
-
     return (
         <div className="d-flex justify-content-around align-items-center flex-wrap">
             {storeMain.continentData.map((item, i) => {
                 return (
-                    <Link to={"/country/" + item.name} key={item.name} className="card" key={i}>
+                    <Link to={"/country/" + item.name} className="card" key={i}>
                         <div className="face face1">
                             <div className="content">
                                 <img alt={item.name} src={item.country_image} style={{ width: 240, height: 200 }} />

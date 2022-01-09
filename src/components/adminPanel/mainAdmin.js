@@ -1,4 +1,4 @@
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import React, { Suspense, useEffect } from 'react';
 import { URL_API } from '../../services/apiService';
 import storeUsers from '../../stores/usersStore';

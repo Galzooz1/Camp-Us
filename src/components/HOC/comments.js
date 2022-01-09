@@ -2,18 +2,11 @@ import { Spin, Tooltip } from 'antd';
 import React from 'react';
 import { Fragment } from 'react';
 import { toast } from 'react-toastify';
-import styled from 'styled-components';
 import storeComment from '../../stores/commentsStore';
 import storeLogin from '../../stores/loginStore';
 
 let Filter = require('bad-words');
 let filter = new Filter();
-
-export const IconDiv = styled.div`
-cursor:pointer;
-font-size:1.7rem;
-margin: 0 4px;
-`
 
 const Comments = ({ comments }) => {
     const commentLikes = (item) => {

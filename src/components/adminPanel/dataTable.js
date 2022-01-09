@@ -3,7 +3,7 @@ import { Table, Input, Button, Space } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
 import storeUsers from '../../stores/usersStore';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import storeAdmin from '../../stores/adminStore';
 
 const DataTable = (props) => {

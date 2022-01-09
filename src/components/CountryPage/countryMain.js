@@ -1,4 +1,4 @@
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import React, { useEffect } from 'react';
 import storeCountry from '../../stores/countryPageStore';
 import { URL_API } from '../../services/apiService';
