@@ -24,6 +24,7 @@ const Footer = (props) => {
                 <div className="col-1-of-2">
                     <p className="footer__copyright">
                         All Rights Reserved &copy; {new Date().getFullYear()}
+                        <br/>
                         Built by &copy; <Link to="#" className="footer__link">Gal Aluf</Link>
                         <br />
                         For more work visit our <Link to="#" className="footer__link"> website</Link>.
