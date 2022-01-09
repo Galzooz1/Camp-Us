@@ -1,8 +1,7 @@
 import { Tooltip } from 'antd';
 import { observer } from 'mobx-react';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
-import { useState } from 'react/cjs/react.development';
 import storeMain from '../../stores/mainStore';
 import { URL_API } from '../../services/apiService';
 import Countries from './countries';
