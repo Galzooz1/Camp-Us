@@ -7,7 +7,7 @@ import storeMain from '../../stores/mainStore';
 import { URL_API } from '../../services/apiService';
 import Countries from './countries';
 
-const Main = (props) => {
+const Main = () => {
     useEffect(() => {
         let url = URL_API + "/countries";
         storeMain.getCountriesData(url);
@@ -15,15 +15,18 @@ const Main = (props) => {
     const [chosenBg, setChosenBg] = useState(null);
     const countriesRef = useRef(null)
     const toursRef = useRef(null)
+    let uniqueContinents;
 
     const [currentContinent, setCurrentContinent] = useState("");
 
     //Set method to prevent duplicate continents
     // let setCountriesData = new Set(storeMain.countriesData);
-    const uniqueContinents = Array.from(new Set(storeMain.countriesData.map(a => a.mainland.fields.mainland_name.stringValue)))
+    if(storeMain.countriesData){
+        uniqueContinents = Array.from(new Set(storeMain.countriesData.map(a => a.mainland.fields.mainland_name.stringValue)))
         .map(id => {
             return storeMain.countriesData.find(a => a.mainland.fields.mainland_name.stringValue === id)
         })
+    }
 
     return (
         <main id="section-tours">
