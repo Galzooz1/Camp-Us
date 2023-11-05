@@ -183,20 +183,6 @@ const RegistrationForm = ({ handleOk }) => {
       </Form.Item>
 
       <Form.Item
-        name="house_number"
-        label="House Number"
-        rules={[
-          {
-            required: false
-          },
-        ]}
-      >
-        <Input
-          style={{ width: '30%' }}
-        />
-      </Form.Item>
-
-      <Form.Item
         name="phone"
         label="Phone Number"
         rules={[

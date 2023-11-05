@@ -7,7 +7,7 @@ import { useLocation } from 'react-router';
 import DataTable from '../adminPanel/dataTable';
 import storeAdmin from '../../stores/adminStore';
 
-const { TabPane } = Tabs;
+const { Item } = Tabs;
 
 const StepsNav = () => {
     let location = useLocation()
@@ -21,7 +21,7 @@ const StepsNav = () => {
                 {/* Countries */}
                 {location.pathname.includes("/country/") && (
                     <>
-                        <TabPane
+                        <Item
                             tab={
                                 <div onClick={() => storeCountry.setActivityName("hotels")}>
                                     {isDesktop ?
@@ -42,8 +42,8 @@ const StepsNav = () => {
                         >
                             <h2 className="section-country__nav-heading heading-primary--sub">Hotels</h2>
                             <CountryContent />
-                        </TabPane>
-                        <TabPane
+                        </Item>
+                        <Item
                             tab={
                                 <div onClick={() => storeCountry.setActivityName("campings")}>
                                     {isDesktop ?
@@ -62,8 +62,8 @@ const StepsNav = () => {
                         >
                             <h2 className="section-country__nav-heading heading-primary--sub">Campings</h2>
                             <CountryContent />
-                        </TabPane>
-                        <TabPane
+                        </Item>
+                        <Item
                             tab={
                                 <div onClick={() => storeCountry.setActivityName("restaurants")}>
                                     {isDesktop ?
@@ -82,8 +82,8 @@ const StepsNav = () => {
                         >
                             <h2 className="section-country__nav-heading heading-primary--sub">Restaurants</h2>
                             <CountryContent />
-                        </TabPane>
-                        <TabPane
+                        </Item>
+                        <Item
                             tab={
                                 <div onClick={() => storeCountry.setActivityName("attractions")}>
                                     {isDesktop ?
@@ -102,13 +102,13 @@ const StepsNav = () => {
                         >
                             <h2 className="section-country__nav-heading heading-primary--sub">Attractions</h2>
                             <CountryContent />
-                        </TabPane>
+                        </Item>
                     </>
                 )}
                 {/* Admin Panel */}
                 {location.pathname.includes("/admin") &&  (
                     <>
-                        <TabPane
+                        <Item
                             tab={
                                 <div onClick={() => storeAdmin.changeApiMethod("users")}>
                                     {isDesktop ?
@@ -126,8 +126,8 @@ const StepsNav = () => {
                         >
                             <h2 className="section-country__nav-heading heading-primary--sub">Users</h2>
                             <DataTable />
-                        </TabPane>
-                        <TabPane
+                        </Item>
+                        <Item
                             tab={
                                 <div onClick={() => storeAdmin.changeApiMethod("countries")}>
                                     {isDesktop ?
@@ -145,8 +145,8 @@ const StepsNav = () => {
                         >
                             <h2 className="section-country__nav-heading heading-primary--sub">Countries</h2>
                             <DataTable />
-                        </TabPane>
-                        <TabPane
+                        </Item>
+                        <Item
                             tab={
                                 <div onClick={() => storeAdmin.changeApiMethod("comments")}>
                                     {isDesktop ?
@@ -164,7 +164,7 @@ const StepsNav = () => {
                         >
                             <h2 className="section-country__nav-heading heading-primary--sub">Comments</h2>
                             <DataTable />
-                        </TabPane>
+                        </Item>
                     </>
                 )}
             </Tabs>

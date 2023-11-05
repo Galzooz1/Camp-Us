@@ -16,7 +16,7 @@ const LoginForm = ({ handleCancel, handleOk, isModalVisible }) => {
 
     return (
         <>
-            <Modal title="Sign-In" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+            <Modal title="Sign-In" open={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                 {!storeLogin.signupVisble ?
                     <Form
                         name="basic"
